@@ -1,7 +1,15 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import PrestationQuoteForm from "@/components/forms/PrestationQuoteForm";
+import { useModalStore } from "@/store/useModalStore";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+} from "@/components/ui/carousel";
 import { ArrowRightIcon } from "@heroicons/react/24/outline";
+import AutoplayPlugin from "embla-carousel-autoplay";
 import { motion } from "framer-motion";
 import Image from "next/image";
 
@@ -30,6 +38,7 @@ const steps = [
 ];
 
 export default function Fonctionnement() {
+  const { openModal } = useModalStore();
   return (
     <section className="w-full bg-yellow-300 relative overflow-hidden">
       <div className="max-w-5xl mx-auto px-4 py-20 grid md:grid-cols-2 gap-8 items-center">
@@ -43,7 +52,7 @@ export default function Fonctionnement() {
             className="text-4xl md:text-5xl font-bold text-slate-900"
           >
             Comment <br />
-            ça marche ?
+            <span className="text-white">ça marche ?</span>
           </motion.h2>
 
           <div className="space-y-6">
@@ -77,18 +86,30 @@ export default function Fonctionnement() {
           >
             <div className="flex flex-col space-y-2">
               <h3 className="text-2xl font-bold text-slate-900">
-                Et votre maison devient{" "}
-                <span className="text-blue-600">effyciente</span>.
+                Optimisez la dépense énergétique de{" "}
+                <span className="text-blue-600"> votre logement</span>.
               </h3>
-              <Button variant="slate" className="w-fit">
-                J&apos;estime mon projet{" "}
-                <ArrowRightIcon className="w-4 h-4 ml-2" />
-              </Button>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.8 }}
+                viewport={{ once: true }}
+              >
+                <Button
+                  variant="slate"
+                  className="w-fit mt-4 bg-slate-900 text-white hover:bg-white hover:text-slate-900 transition-colors"
+                  onClick={() => openModal("Estimation Projet")}
+                >
+                  J&apos;estime mon projet{" "}
+                  <ArrowRightIcon className="w-4 h-4 ml-2" />
+                </Button>
+
+              </motion.div>
             </div>
           </motion.div>
         </div>
 
-        {/* Right Image */}
+        {/* Right Image Carousel */}
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
@@ -96,14 +117,42 @@ export default function Fonctionnement() {
           viewport={{ once: true }}
           className="relative aspect-[4/3] rounded-2xl overflow-hidden"
         >
-          <Image
-            src="/images/maison.png"
-            alt="Maison rénovée"
-            fill
-            className="object-cover"
-          />
+          <Carousel
+            opts={{
+              align: "start",
+              loop: true,
+            }}
+            className="w-full"
+            plugins={[
+              AutoplayPlugin({
+                delay: 5000,
+                stopOnInteraction: false,
+                stopOnMouseEnter: true,
+              }),
+            ]}
+          >
+            <CarouselContent>
+              {[
+                "/houses/maison-1.png",
+                "/houses/maison-2.png",
+                "/houses/maison-3.png",
+              ].map((src, index) => (
+                <CarouselItem key={index}>
+                  <div className="relative aspect-[4/3] overflow-hidden rounded-2xl">
+                    <Image
+                      src={src}
+                      alt={`Maison rénovée ${index + 1}`}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+          </Carousel>
         </motion.div>
       </div>
+      <PrestationQuoteForm />
     </section>
   );
 }
