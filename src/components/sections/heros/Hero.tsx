@@ -1,7 +1,8 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
+import QuoteForm from "@/components/forms/QuoteForm";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
+import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -75,8 +76,8 @@ const Hero = () => {
 
       {/* Navigation */}
       <div
-        className={`relative w-full z-50 transition-all duration-300 ${
-          isScrolled ? "fixed top-0 right-0 left-0 bg-gray-900 shadow-lg" : ""
+        className={`w-full z-50 transition-all duration-300 ${
+          isScrolled ? "fixed top-0 right-0 left-0 bg-white shadow-lg" : "relative"
         }`}
       >
         <header
@@ -89,11 +90,17 @@ const Hero = () => {
           <div className="flex justify-between items-center">
             <Link
               className={`text-2xl font-semibold transition-colors ${
-                isScrolled ? "text-white" : "text-slate-700"
+                isScrolled ? "text-slate-900" : "text-slate-700"
               }`}
               href="/"
             >
-              <Image src="/logo/logo.png" alt="Logo" width={130} height={130} />
+              <Image
+                src={isScrolled ? "/logo/logo-black.png" : "/logo/logo.png"}
+                alt="Logo"
+                width={isScrolled ? 100 : 130}
+                height={isScrolled ? 100 : 130}
+                className="transition-all duration-300"
+              />
             </Link>
 
             {/* Hamburger button */}
@@ -105,17 +112,17 @@ const Hero = () => {
             >
               <div className="flex flex-col justify-center items-center w-6 h-6">
                 <span
-                  className={`absolute w-6 h-0.5 transition-all duration-300 ease-in-out bg-white ${
+                  className={`absolute w-6 h-0.5 transition-all duration-300 ease-in-out ${isScrolled ? "bg-slate-900" : "bg-white"} ${
                     isMenuOpen ? "rotate-45" : "translate-y-[-6px]"
                   }`}
                 ></span>
                 <span
-                  className={`absolute w-6 h-0.5 transition-all duration-300 ease-in-out bg-white ${
+                  className={`absolute w-6 h-0.5 transition-all duration-300 ease-in-out ${isScrolled ? "bg-slate-900" : "bg-white"} ${
                     isMenuOpen ? "opacity-0" : "opacity-100"
                   }`}
                 ></span>
                 <span
-                  className={`absolute w-6 h-0.5 transition-all duration-300 ease-in-out bg-white ${
+                  className={`absolute w-6 h-0.5 transition-all duration-300 ease-in-out ${isScrolled ? "bg-slate-900" : "bg-white"} ${
                     isMenuOpen ? "-rotate-45" : "translate-y-[6px]"
                   }`}
                 ></span>
@@ -124,19 +131,9 @@ const Hero = () => {
 
             {/* Desktop navigation */}
             <div className="hidden md:flex items-center">
-              <Link href="/connexion">
-                <Button
-                  value="OBTENIR UN DEVIS"
-                  variant="yellow"
-                  className={
-                    isScrolled
-                      ? "text-white border-white hover:bg-white hover:text-white"
-                      : ""
-                  }
-                >
-                  OBTENIR UN DEVIS
-                </Button>
-              </Link>
+              <QuoteForm
+                buttonClassName={`flex items-center justify-center gap-2 ${isScrolled ? "" : "text-white border-white hover:bg-white hover:text-slate-900"}`}
+              />
             </div>
           </div>
 
@@ -170,35 +167,25 @@ const Hero = () => {
               >
                 Simulateur
               </Link>
-              <Link href={"/connexion"}>
-                <Button
-                  variant="yellow"
-                  value="MON ESPACE"
-                  className="text-white border-white hover:bg-white hover:text-gray-900 mt-4"
-                >
-                  OBTENIR UN DEVIS
-                </Button>
-              </Link>
+              <QuoteForm buttonClassName="text-white border-white hover:bg-white hover:text-gray-900 mt-4" />
             </div>
           </div>
         </header>
       </div>
 
       {/* Hero Content */}
-      <div className="relative z-10 min-h-[calc(100vh-200px)] px-4 flex flex-col items-center justify-center text-center text-white p-4">
-        <h1 className="text-3xl md:text-5xl md:text-6xl font-bold mb-6 max-w-4xl">
-          Rénovez votre maison avec <br />
-          Île De France Environnement
-        </h1>
-        <p className="text-xl md:text-2xl mb-4 max-w-2xl">
-          Isolation des murs exterieurs | des murs interieurs | de la toiture |
-          des sols | pompe à chaleur Air/air | pompe à chaleur Air/eau | ballon
-          thermodynamique sur toute la france
-        </p>
-        <div className="flex flex-col items-center space-y-2 mb-8 mt-2">
+      <div className="relative z-10 min-h-[calc(100vh-200px)] px-4 flex flex-col items-center justify-center text-center text-white p-4 md:mt-0 mt-7">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="flex flex-col items-center space-y-2 mb-8 mt-2"
+        >
           <div className="bg-white/30 px-3 py-1 rounded-full">
             <div className="flex items-center space-x-2">
-              <span className="text-lg font-semibold">Excellent</span>
+              <span className="md:text-lg text-sm font-semibold">
+                Excellent
+              </span>
               <div className="flex">
                 {[...Array(5)].map((_, i) => (
                   <svg
@@ -213,18 +200,52 @@ const Hero = () => {
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
+        <motion.h1
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
+          className="text-3xl md:text-5xl md:text-6xl font-bold mb-6 max-w-4xl"
+        >
+          <span className="md:block hidden">Rénovez votre maison avec</span> Île
+          De France Environnement
+        </motion.h1>
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: "easeOut", delay: 0.4 }}
+          className="md:text-xl text-sm md:text-2xl mb-4 max-w-2xl"
+        >
+          Isolation des murs exterieurs | des murs interieurs | de la toiture |
+          des sols | pompe à chaleur Air/air | pompe à chaleur Air/eau | ballon
+          thermodynamique sur toute la france
+        </motion.p>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: "easeOut", delay: 0.6 }}
+        >
+          <QuoteForm
+            withArrow
+            buttonClassName="flex items-center justify-center gap-2 mt-4"
+          />
+        </motion.div>
       </div>
 
       {/* Floating arrow */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden md:block">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: "easeOut", delay: 0.8 }}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2"
+      >
         <ChevronDownIcon
           className="w-8 h-8 text-white animate-bounce opacity-75 hover:opacity-100 transition-opacity cursor-pointer"
           onClick={() =>
             window.scrollTo({ top: window.innerHeight, behavior: "smooth" })
           }
         />
-      </div>
+      </motion.div>
     </section>
   );
 };
