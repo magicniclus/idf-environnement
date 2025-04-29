@@ -77,7 +77,9 @@ const Hero = () => {
       {/* Navigation */}
       <div
         className={`w-full z-50 transition-all duration-300 ${
-          isScrolled ? "fixed top-0 right-0 left-0 bg-white shadow-lg" : "relative"
+          isScrolled
+            ? "fixed top-0 right-0 left-0 bg-white shadow-lg"
+            : "relative"
         }`}
       >
         <header
@@ -112,19 +114,19 @@ const Hero = () => {
             >
               <div className="flex flex-col justify-center items-center w-6 h-6">
                 <span
-                  className={`absolute w-6 h-0.5 transition-all duration-300 ease-in-out ${isScrolled ? "bg-slate-900" : "bg-white"} ${
-                    isMenuOpen ? "rotate-45" : "translate-y-[-6px]"
-                  }`}
+                  className={`absolute w-6 h-0.5 transition-all duration-300 ease-in-out ${
+                    isScrolled ? "bg-slate-900" : "bg-white"
+                  } ${isMenuOpen ? "rotate-45" : "translate-y-[-6px]"}`}
                 ></span>
                 <span
-                  className={`absolute w-6 h-0.5 transition-all duration-300 ease-in-out ${isScrolled ? "bg-slate-900" : "bg-white"} ${
-                    isMenuOpen ? "opacity-0" : "opacity-100"
-                  }`}
+                  className={`absolute w-6 h-0.5 transition-all duration-300 ease-in-out ${
+                    isScrolled ? "bg-slate-900" : "bg-white"
+                  } ${isMenuOpen ? "opacity-0" : "opacity-100"}`}
                 ></span>
                 <span
-                  className={`absolute w-6 h-0.5 transition-all duration-300 ease-in-out ${isScrolled ? "bg-slate-900" : "bg-white"} ${
-                    isMenuOpen ? "-rotate-45" : "translate-y-[6px]"
-                  }`}
+                  className={`absolute w-6 h-0.5 transition-all duration-300 ease-in-out ${
+                    isScrolled ? "bg-slate-900" : "bg-white"
+                  } ${isMenuOpen ? "-rotate-45" : "translate-y-[6px]"}`}
                 ></span>
               </div>
             </button>
@@ -132,7 +134,11 @@ const Hero = () => {
             {/* Desktop navigation */}
             <div className="hidden md:flex items-center">
               <QuoteForm
-                buttonClassName={`flex items-center justify-center gap-2 ${isScrolled ? "" : "text-white border-white hover:bg-white hover:text-slate-900"}`}
+                buttonClassName={`flex items-center justify-center gap-2 ${
+                  isScrolled
+                    ? ""
+                    : "text-white border-white hover:bg-white hover:text-slate-900"
+                }`}
               />
             </div>
           </div>
@@ -207,8 +213,8 @@ const Hero = () => {
           transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
           className="text-3xl md:text-5xl md:text-6xl font-bold mb-6 max-w-4xl"
         >
-          <span className="md:block hidden">Rénovez votre maison avec</span> Île
-          De France Environnement
+          <span className="md:block hidden">Rénovez votre maison avec</span> IDF
+          Environnement
         </motion.h1>
         <motion.p
           initial={{ opacity: 0, y: 20 }}
