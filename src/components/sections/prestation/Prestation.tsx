@@ -59,7 +59,7 @@ const prestations = [
 export default function Prestation() {
   const { openModal } = useModalStore();
   return (
-    <section className="w-full py-20 bg-white">
+    <section id="prestations" className="w-full py-20 bg-white">
       <div className="max-w-5xl mx-auto px-4">
         <div className="space-y-8 mb-12">
           <motion.h2
@@ -100,15 +100,17 @@ export default function Prestation() {
                 onClick={() => openModal(prestation.title)}
                 className={`block w-full p-6 rounded-2xl ${prestation.color} transition-colors duration-200 group h-full flex flex-col`}
               >
-                <div className="flex-1 flex flex-col justify-between">
+                <div className="flex-1 flex md:flex-col justify-between md:items-center items-end">
                   <div>
-                    <h3 className="text-xl font-semibold text-slate-900 mb-3">
+                    <h3 className="text-xl font-semibold text-slate-900 mb-3 md:text-center text-left md:max-w-none max-w-9/12">
                       {prestation.title}
                     </h3>
-                    <p className="text-slate-600">{prestation.description}</p>
+                    <p className="text-slate-600 md:text-center text-left md:max-w-none max-w-9/12">
+                      {prestation.description}
+                    </p>
                   </div>
                   <div className="mt-4 flex justify-end">
-                    <ArrowRightIcon className="w-5 h-5 text-slate-600 group-hover:translate-x-1 transition-transform duration-200" />
+                    <ArrowRightIcon className="md:w-5 md:h-5 w-8 h-8 text-slate-600 group-hover:translate-x-1 transition-transform duration-200" />
                   </div>
                 </div>
               </button>
