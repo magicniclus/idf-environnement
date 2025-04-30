@@ -1,4 +1,5 @@
-import { GoogleSpreadsheet } from "google-spreadsheet";
+import { GoogleSpreadsheet, GoogleSpreadsheetWorksheet } from "google-spreadsheet";
+import { JWT } from "google-auth-library";
 
 const SHEET_ID = process.env.GOOGLE_SHEET_ID;
 const SHEET_NAME = "accueil";
@@ -8,6 +9,11 @@ const GOOGLE_PRIVATE_KEY = process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, "\n")
 if (!SHEET_ID || !GOOGLE_CLIENT_EMAIL || !GOOGLE_PRIVATE_KEY) {
   throw new Error("Missing required environment variables for Google Sheets");
 }
+
+// Assertion de type pour TypeScript
+const clientEmail = GOOGLE_CLIENT_EMAIL as string;
+const privateKey = GOOGLE_PRIVATE_KEY as string;
+const sheetId = SHEET_ID as string;
 
 export type FormData = {
   nom?: string;
@@ -21,19 +27,19 @@ export type FormData = {
 
 export async function appendToSheet(data: FormData) {
   try {
-    const doc = new GoogleSpreadsheet(SHEET_ID);
-
-    await doc.useServiceAccountAuth({
-      client_email: GOOGLE_CLIENT_EMAIL,
-      private_key: GOOGLE_PRIVATE_KEY,
+    const auth = new JWT({
+      email: clientEmail,
+      key: privateKey,
+      scopes: ["https://www.googleapis.com/auth/spreadsheets"]
     });
 
+    const doc = new GoogleSpreadsheet(sheetId, auth);
     await doc.loadInfo();
 
     // Chercher ou créer la feuille "accueil"
-    let sheet = doc.sheetsByTitle[SHEET_NAME];
+    let sheet = doc.sheetsByTitle[SHEET_NAME] as GoogleSpreadsheetWorksheet;
     if (!sheet) {
-      sheet = await doc.addSheet({ title: SHEET_NAME });
+      sheet = await doc.addSheet({ title: SHEET_NAME }) as GoogleSpreadsheetWorksheet;
     }
 
     // Définir les en-têtes si la feuille est vide
