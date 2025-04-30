@@ -43,7 +43,7 @@ export default function PhoneNumber() {
   if (!isScrolled) return null;
 
   return (
-    <div className="fixed top-[100px] right-20 z-40 bg-slate-100 text-slate-900 py-2 px-4 rounded-lg shadow-lg">
+    <div className="fixed top-[110px] right-20 z-40 bg-slate-100 text-slate-900 py-2 px-4 rounded-lg shadow-lg">
       <div className="flex flex-col items-end">
         <Link
           href="tel:0811360027"
