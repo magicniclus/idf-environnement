@@ -37,7 +37,7 @@ export default function Footer() {
               alt="IDF Environnement"
               width={200}
               height={80}
-              className="w-48"
+              className="w-24 md:w-48"
             />
             <div className="space-y-2">
               <p className="text-slate-300">
@@ -55,7 +55,7 @@ export default function Footer() {
           </div>
 
           {/* Right Column - Useful Links */}
-          <div className="grid grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {usefulLinks.map((section) => (
               <div key={section.title} className="space-y-4">
                 <h3 className="text-lg font-semibold text-white">
