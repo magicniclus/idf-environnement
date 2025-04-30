@@ -100,7 +100,7 @@ export default function Prestation() {
                 onClick={() => openModal(prestation.title)}
                 className={`block w-full p-6 rounded-2xl ${prestation.color} transition-colors duration-200 group h-full flex flex-col`}
               >
-                <div className="flex-1 flex md:flex-col justify-between md:items-center items-end">
+                <div className="flex-1 flex md:flex-col justify-between md:items-center justify-between items-end">
                   <div>
                     <h3 className="text-xl font-semibold text-slate-900 mb-3 md:text-center text-left md:max-w-none max-w-9/12">
                       {prestation.title}
