@@ -43,7 +43,8 @@ export default function Faq() {
       whileInView={{ opacity: 1 }}
       transition={{ duration: 0.3 }}
       viewport={{ once: true }}
-      id="faq" className="w-full bg-slate-50 py-20"
+      id="faq"
+      className="w-full bg-slate-50 py-20"
     >
       <div className="max-w-5xl mx-auto px-4">
         <div className="space-y-8 mb-12">
@@ -74,7 +75,7 @@ export default function Faq() {
                   value={`item-${index}`}
                   className="border rounded-lg px-4 py-2"
                 >
-                  <AccordionTrigger className="text-left text-lg font-semibold text-slate-900 hover:text-blue-600 hover:no-underline py-2">
+                  <AccordionTrigger className="text-left text-lg font-semibold text-slate-900 hover:text-yellow-500 hover:no-underline py-2">
                     {item.question}
                   </AccordionTrigger>
                   <AccordionContent className="text-slate-600 pb-2">
