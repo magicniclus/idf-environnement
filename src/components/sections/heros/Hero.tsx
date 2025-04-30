@@ -132,7 +132,37 @@ const Hero = () => {
             </button>
 
             {/* Desktop navigation */}
-            <div className="hidden md:flex items-center">
+            <div className="hidden md:flex items-center space-x-8">
+              <Link
+                href="#prestations"
+                className={`font-medium transition-colors hover:text-yellow-500 ${
+                  isScrolled
+                    ? "text-slate-600 hover:text-slate-900"
+                    : "text-white hover:text-slate-200"
+                }`}
+              >
+                Nos prestations
+              </Link>
+              <Link
+                href="#what"
+                className={`font-medium transition-colors hover:text-yellow-500 ${
+                  isScrolled
+                    ? "text-slate-600 hover:text-slate-900"
+                    : "text-white hover:text-slate-200"
+                }`}
+              >
+                Comment ça marche ?
+              </Link>
+              <Link
+                href="#faq"
+                className={`font-medium transition-colors hover:text-yellow-500 ${
+                  isScrolled
+                    ? "text-slate-600 hover:text-slate-900"
+                    : "text-white hover:text-slate-200"
+                }`}
+              >
+                FAQ
+              </Link>
               <QuoteForm
                 buttonClassName={`flex items-center justify-center gap-2 ${
                   isScrolled
@@ -154,24 +184,24 @@ const Hero = () => {
             <div className="flex flex-col items-center space-y-8 p-8">
               <Link
                 className="text-white text-2xl font-medium hover:text-primary transition-colors duration-300"
-                href="/"
+                href="#prestations"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Accueil
+                Nos prestations
               </Link>
               <Link
                 className="text-white text-2xl font-medium hover:text-primary transition-colors duration-300"
-                href="/entreprise"
+                href="#what"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Professionnels
+                Comment ça marche ?
               </Link>
               <Link
                 className="text-white text-2xl font-medium hover:text-primary transition-colors duration-300"
-                href="/simulateur/v3"
+                href="#faq"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Simulateur
+                FAQ
               </Link>
               <QuoteForm buttonClassName="text-white border-white hover:bg-white hover:text-gray-900 mt-4" />
             </div>
@@ -214,7 +244,7 @@ const Hero = () => {
           className="text-3xl md:text-5xl md:text-6xl font-bold mb-6 max-w-4xl"
         >
           <span className="md:block hidden">Rénovez votre maison avec</span> IDF
-          Environnement
+          ENVIRONNEMENT
         </motion.h1>
         <motion.p
           initial={{ opacity: 0, y: 20 }}
