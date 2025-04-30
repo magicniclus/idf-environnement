@@ -1,7 +1,6 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
 import {
   Dialog,
   DialogContent,
@@ -32,7 +31,7 @@ const prestations = [
   "Ballon thermodynamique",
 ] as const;
 
-type Prestation = typeof prestations[number];
+
 
 interface QuoteFormProps {
   buttonClassName?: string;
@@ -44,8 +43,17 @@ export default function QuoteForm({
   withArrow,
 }: QuoteFormProps) {
   const [open, setOpen] = useState(false);
-  const [acceptPolicy, setAcceptPolicy] = useState(false);
-  const [selectedPrestation, setSelectedPrestation] = useState<Prestation | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [formData, setFormData] = useState({
+    prenom: "",
+    nom: "",
+    email: "",
+    telephone: "",
+    codePostal: "",
+    prestation: "",
+    message: "",
+  });
+
   const router = useRouter();
   const arrowIcon = withArrow ? (
     <ArrowRightIcon className="w-4 h-4 ml-2" />
@@ -53,17 +61,57 @@ export default function QuoteForm({
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log("Form submitted with prestation:", selectedPrestation);
-    setOpen(false);
-    router.push("/merci");
+    setLoading(true);
+    try {
+      const response = await fetch('/api/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ...formData,
+          source: 'Formulaire Principal',
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Erreur réseau');
+      }
+
+      setFormData({
+        prenom: "",
+        nom: "",
+        email: "",
+        telephone: "",
+        codePostal: "",
+        prestation: "",
+        message: "",
+      });
+      setOpen(false);
+      router.push("/merci");
+    } catch (error) {
+      console.error('Erreur lors de l\'envoi:', error);
+      console.error('Erreur lors de l\'envoi du message');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button variant="yellow" className={buttonClassName}>
-          OBTENIR UN DEVIS {arrowIcon}
+        <Button variant="yellow" className={buttonClassName} disabled={loading}>
+          {loading ? (
+            <>
+              <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+              Envoi en cours...
+            </>
+          ) : (
+            <>OBTENIR UN DEVIS {arrowIcon}</>
+          )}
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
@@ -78,11 +126,23 @@ export default function QuoteForm({
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label htmlFor="firstname">Prénom</Label>
-              <Input id="firstname" placeholder="Votre prénom" required />
+              <Input
+                id="firstname"
+                placeholder="Votre prénom"
+                value={formData.prenom}
+                onChange={(e) => setFormData({ ...formData, prenom: e.target.value })}
+                required
+              />
             </div>
             <div className="space-y-2">
               <Label htmlFor="lastname">Nom</Label>
-              <Input id="lastname" placeholder="Votre nom" required />
+              <Input
+                id="lastname"
+                placeholder="Votre nom"
+                value={formData.nom}
+                onChange={(e) => setFormData({ ...formData, nom: e.target.value })}
+                required
+              />
             </div>
           </div>
           <div className="space-y-2">
@@ -91,6 +151,8 @@ export default function QuoteForm({
               id="email"
               type="email"
               placeholder="votre@email.com"
+              value={formData.email}
+              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
               required
             />
           </div>
@@ -100,52 +162,54 @@ export default function QuoteForm({
               id="phone"
               type="tel"
               placeholder="06 12 34 56 78"
+              value={formData.telephone}
+              onChange={(e) => setFormData({ ...formData, telephone: e.target.value })}
               required
             />
           </div>
           <div className="space-y-2">
             <Label htmlFor="postal">Code Postal</Label>
-            <Input id="postal" placeholder="75000" required />
+            <Input
+              id="postal"
+              placeholder="75000"
+              value={formData.codePostal}
+              onChange={(e) => setFormData({ ...formData, codePostal: e.target.value })}
+              required
+            />
           </div>
           <div className="space-y-2">
             <Label htmlFor="prestation">Prestation souhaitée</Label>
             <Select
-              defaultValue="Sélectionnez une prestation"
-              value={selectedPrestation || "Sélectionnez une prestation"}
-              onValueChange={(value: string) => setSelectedPrestation(value as Prestation)}
+              defaultValue={formData.prestation}
+              onValueChange={(value) => {
+                setFormData({ ...formData, prestation: value });
+              }}
             >
-              <SelectTrigger className="w-full bg-white border border-gray-300 rounded px-4 py-2 text-gray-700">
-                <SelectValue placeholder="Prestation souhaitée" />
+              <SelectTrigger className="w-full">
+                <SelectValue placeholder="Sélectionnez une prestation" />
               </SelectTrigger>
               <SelectContent>
                 {prestations.map((prestation) => (
-                  <SelectItem 
-                    key={prestation} 
-                    value={prestation}
-                    className="py-2 cursor-pointer hover:bg-gray-100"
-                  >
+                  <SelectItem key={prestation} value={prestation}>
                     {prestation}
                   </SelectItem>
                 ))}
               </SelectContent>
             </Select>
           </div>
-          <div className="flex items-center space-x-2">
-            <Checkbox
-              id="policy"
-              checked={acceptPolicy}
-              onCheckedChange={(checked) => setAcceptPolicy(checked as boolean)}
-              required
-            />
-            <label
-              htmlFor="policy"
-              className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-            >
-              J&apos;accepte la politique de confidentialité
-            </label>
-          </div>
-          <Button type="submit" variant="yellow" className="w-full">
-            Envoyer ma demande
+
+          <Button type="submit" variant="yellow" className="w-full" disabled={loading}>
+            {loading ? (
+              <>
+                <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                Envoi en cours...
+              </>
+            ) : (
+              'Envoyer ma demande'
+            )}
           </Button>
         </form>
       </DialogContent>
