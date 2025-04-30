@@ -8,8 +8,8 @@ import {
 } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import { useModalStore } from "@/store/useModalStore";
-import { PhoneIcon } from "@heroicons/react/24/outline";
 import { motion } from "framer-motion";
+import { PhoneCallIcon } from "lucide-react";
 
 const faqItems = [
   {
@@ -103,9 +103,9 @@ export default function Faq() {
               </p>
               <a
                 href="tel:0811360027"
-                className="flex items-center space-x-2 text-slate-900 mt-3"
+                className="flex items-center space-x-2 mt-3 text-green-500"
               >
-                <PhoneIcon className="w-5 h-5" />
+                <PhoneCallIcon className="w-5 h-5" />
                 <span className="text-2xl font-bold">0 811 36 00 27</span>
               </a>
               <p className="text-sm text-slate-600">Service Gratuit</p>
@@ -114,7 +114,7 @@ export default function Faq() {
               <Button
                 onClick={() => openModal("Question Projet")}
                 variant="slate"
-                className="w-full bg-slate-900 text-white hover:bg-white hover:text-slate-900 transition-colors"
+                className="w-full bg-green-500 text-white hover:bg-white hover:text-green-500 border-green-500 border transition-colors"
               >
                 Demander un devis
               </Button>
