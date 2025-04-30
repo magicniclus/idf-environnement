@@ -15,13 +15,12 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "IDF Environnement - Isolation, ITE, ITI, PAC sur toute la France",
-  description: "IDF Environnement vous accompagne dans votre projet d'isolation, ITE, ITI, PAC sur toute la France",
+  description:
+    "IDF Environnement vous accompagne dans votre projet d'isolation, ITE, ITI, PAC sur toute la France",
   icons: {
-    icon: [
-      { url: "icon.png", type: "image/png" }
-    ],
-    apple: "icon.png"
-  }
+    icon: [{ url: "/favicon.png", type: "image/png" }],
+    apple: "/favicon.png",
+  },
 };
 
 export default function RootLayout({
