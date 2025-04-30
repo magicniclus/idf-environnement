@@ -33,10 +33,6 @@ const prestations = [
   "Ballon thermodynamique",
 ] as const;
 
-interface ApiError extends Error {
-  status?: number;
-}
-
 interface PrestationQuoteFormProps {
   buttonClassName?: string;
   withArrow?: boolean;
@@ -88,7 +84,6 @@ export default function PrestationQuoteForm({
         throw new Error(responseData.error || responseData.details || 'Erreur serveur');
       }
 
-      alert("Message envoyé avec succès");
       setFormData({
         prenom: "",
         nom: "",
@@ -101,12 +96,10 @@ export default function PrestationQuoteForm({
       closeModal();
       router.push("/merci");
     } catch (error) {
-      const apiError = error as ApiError;
       console.error("Erreur lors de l'envoi:", error);
-      const errorMessage = apiError.message || "Erreur lors de l'envoi du message";
-      alert(`Erreur: ${errorMessage}`);
-    } finally {
       setLoading(false);
+      router.push("/erreur");
+      return;
     }
   };
 
