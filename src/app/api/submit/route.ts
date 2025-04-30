@@ -24,11 +24,25 @@ export async function POST(request: Request) {
       hasSheetId: !!process.env.GOOGLE_SHEET_ID
     });
 
+    // Vérifier le format de la clé privée
+    console.log('Format de la clé privée:', {
+      hasKey: !!process.env.GOOGLE_PRIVATE_KEY,
+      keyLength: process.env.GOOGLE_PRIVATE_KEY?.length,
+      startsWithHeader: process.env.GOOGLE_PRIVATE_KEY?.startsWith('-----BEGIN PRIVATE KEY-----'),
+      endsWithFooter: process.env.GOOGLE_PRIVATE_KEY?.endsWith('-----END PRIVATE KEY-----\n')
+    });
+
+    const privateKey = process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, "\n");
+    
+    if (!privateKey?.includes('-----BEGIN PRIVATE KEY-----')) {
+      throw new Error('Format de clé privée invalide');
+    }
+
     // Configurer l'authentification
     const auth = new google.auth.GoogleAuth({
       credentials: {
         client_email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
-        private_key: process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, "\n"),
+        private_key: privateKey,
       },
       scopes: ["https://www.googleapis.com/auth/spreadsheets"],
     });
