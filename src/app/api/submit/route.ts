@@ -32,20 +32,41 @@ export async function POST(request: Request) {
       endsWithFooter: process.env.GOOGLE_PRIVATE_KEY?.endsWith('-----END PRIVATE KEY-----\n')
     });
 
-    const privateKey = process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, "\n");
+    // Nettoyer et formater la clé privée
+    let privateKey = process.env.GOOGLE_PRIVATE_KEY || '';
     
-    if (!privateKey?.includes('-----BEGIN PRIVATE KEY-----')) {
-      throw new Error('Format de clé privée invalide');
+    // Supprimer les guillemets au début et à la fin si présents
+    privateKey = privateKey.replace(/^"|"$/g, '');
+    
+    // Remplacer les \n littéraux par de vrais sauts de ligne
+    privateKey = privateKey.replace(/\\n/g, '\n');
+    
+    console.log('Clé privée formatée:', {
+      length: privateKey.length,
+      hasHeader: privateKey.includes('-----BEGIN PRIVATE KEY-----'),
+      hasFooter: privateKey.includes('-----END PRIVATE KEY-----'),
+      firstChars: privateKey.substring(0, 30) + '...',
+      lastChars: '...' + privateKey.substring(privateKey.length - 30)
+    });
+    
+    if (!privateKey.includes('-----BEGIN PRIVATE KEY-----') || !privateKey.includes('-----END PRIVATE KEY-----')) {
+      throw new Error('Format de clé privée invalide - Vérifiez le format dans les variables d\'environnement');
     }
 
     // Configurer l'authentification
-    const auth = new google.auth.GoogleAuth({
-      credentials: {
-        client_email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
-        private_key: privateKey,
-      },
-      scopes: ["https://www.googleapis.com/auth/spreadsheets"],
-    });
+    let auth;
+    try {
+      auth = new google.auth.GoogleAuth({
+        credentials: {
+          client_email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
+          private_key: privateKey,
+        },
+        scopes: ["https://www.googleapis.com/auth/spreadsheets"],
+      });
+    } catch (error) {
+      console.error('Erreur d\'authentification:', error);
+      throw new Error(`Erreur d\'authentification Google: ${error instanceof Error ? error.message : 'Erreur inconnue'}`);
+    }
 
     const sheets = google.sheets({ version: "v4", auth });
     console.log("Auth configurée");
