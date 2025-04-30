@@ -49,7 +49,8 @@ export default function PhoneNumber() {
           href="tel:0811360027"
           className="text-lg font-bold hover:underline flex items-center space-x-2 text-green-500"
         >
-          <PhoneCallIcon className="w-5 h-5 mr-2" /> 0 811 36 00 27
+          <PhoneCallIcon className="w-5 h-5 mr-2 text-green-500" /> 0 811 36 00
+          27
         </Link>
         <p className="text-xs">Service d&apos;un appel gratuit</p>
         <p className="text-[8px]">Du lundi au vendredi de 8h30 à 19h</p>
