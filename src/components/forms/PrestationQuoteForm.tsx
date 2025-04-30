@@ -65,6 +65,11 @@ export default function PrestationQuoteForm({
     e.preventDefault();
     setLoading(true);
     try {
+      console.log('Envoi des données:', {
+        ...formData,
+        source: "Formulaire de Prestation"
+      });
+
       const response = await fetch("/api/submit", {
         method: "POST",
         headers: {
@@ -76,9 +81,11 @@ export default function PrestationQuoteForm({
         }),
       });
 
+      const responseData = await response.json();
+      console.log('Réponse du serveur:', responseData);
+
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || 'Erreur serveur');
+        throw new Error(responseData.error || responseData.details || 'Erreur serveur');
       }
 
       alert("Message envoyé avec succès");
