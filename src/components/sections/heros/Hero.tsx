@@ -175,13 +175,13 @@ const Hero = () => {
 
           {/* Mobile navigation overlay */}
           <div
-            className={`fixed inset-0 bg-gray-900 bg-opacity-95 z-40 flex flex-col justify-center items-center transition-all duration-500 ease-in-out md:hidden ${
+            className={`fixed inset-0 bg-gray-900 bg-opacity-95 z-40 flex flex-col justify-center items-start transition-all duration-500 ease-in-out md:hidden ${
               isMenuOpen
                 ? "opacity-100 visible"
                 : "opacity-0 invisible pointer-events-none"
             }`}
           >
-            <div className="flex flex-col items-center space-y-8 p-8">
+            <div className="flex flex-col items-start space-y-8 p-8">
               <Link
                 className="text-white text-2xl font-medium hover:text-primary transition-colors duration-300"
                 href="#prestations"
