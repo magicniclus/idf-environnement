@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { NextResponse } from "next/server";
 import { google } from "googleapis";
+import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
   try {
@@ -21,36 +21,39 @@ export async function POST(request: Request) {
     console.log("Variables d'environnement présentes:", {
       hasEmail: !!process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
       hasKey: !!process.env.GOOGLE_PRIVATE_KEY,
-      hasSheetId: !!process.env.GOOGLE_SHEET_ID
+      hasSheetId: !!process.env.GOOGLE_SHEET_ID,
     });
 
     // Vérifier le format de la clé privée
-    console.log('Format de la clé privée:', {
+    console.log("Format de la clé privée:", {
       hasKey: !!process.env.GOOGLE_PRIVATE_KEY,
       keyLength: process.env.GOOGLE_PRIVATE_KEY?.length,
-      startsWithHeader: process.env.GOOGLE_PRIVATE_KEY?.startsWith('-----BEGIN PRIVATE KEY-----'),
-      endsWithFooter: process.env.GOOGLE_PRIVATE_KEY?.endsWith('-----END PRIVATE KEY-----\n')
+      startsWithHeader: process.env.GOOGLE_PRIVATE_KEY?.startsWith(
+        "-----BEGIN PRIVATE KEY-----"
+      ),
+      endsWithFooter: process.env.GOOGLE_PRIVATE_KEY?.endsWith(
+        "-----END PRIVATE KEY-----\n"
+      ),
     });
 
     // Nettoyer et formater la clé privée
-    let privateKey = process.env.GOOGLE_PRIVATE_KEY || '';
-    
-    // Supprimer les guillemets au début et à la fin si présents
-    privateKey = privateKey.replace(/^"|"$/g, '');
-    
-    // Remplacer les \n littéraux par de vrais sauts de ligne
-    privateKey = privateKey.replace(/\\n/g, '\n');
-    
-    console.log('Clé privée formatée:', {
+    const privateKey = process.env.GOOGLE_PRIVATE_KEY;
+
+    console.log("Clé privée formatée:", {
       length: privateKey.length,
-      hasHeader: privateKey.includes('-----BEGIN PRIVATE KEY-----'),
-      hasFooter: privateKey.includes('-----END PRIVATE KEY-----'),
-      firstChars: privateKey.substring(0, 30) + '...',
-      lastChars: '...' + privateKey.substring(privateKey.length - 30)
+      hasHeader: privateKey.includes("-----BEGIN PRIVATE KEY-----"),
+      hasFooter: privateKey.includes("-----END PRIVATE KEY-----"),
+      firstChars: privateKey.substring(0, 30) + "...",
+      lastChars: "..." + privateKey.substring(privateKey.length - 30),
     });
-    
-    if (!privateKey.includes('-----BEGIN PRIVATE KEY-----') || !privateKey.includes('-----END PRIVATE KEY-----')) {
-      throw new Error('Format de clé privée invalide - Vérifiez le format dans les variables d\'environnement');
+
+    if (
+      !privateKey.includes("-----BEGIN PRIVATE KEY-----") ||
+      !privateKey.includes("-----END PRIVATE KEY-----")
+    ) {
+      throw new Error(
+        "Format de clé privée invalide - Vérifiez le format dans les variables d'environnement"
+      );
     }
 
     // Configurer l'authentification
@@ -64,8 +67,12 @@ export async function POST(request: Request) {
         scopes: ["https://www.googleapis.com/auth/spreadsheets"],
       });
     } catch (error) {
-      console.error('Erreur d\'authentification:', error);
-      throw new Error(`Erreur d\'authentification Google: ${error instanceof Error ? error.message : 'Erreur inconnue'}`);
+      console.error("Erreur d'authentification:", error);
+      throw new Error(
+        `Erreur d\'authentification Google: ${
+          error instanceof Error ? error.message : "Erreur inconnue"
+        }`
+      );
     }
 
     const sheets = google.sheets({ version: "v4", auth });
@@ -162,14 +169,15 @@ export async function POST(request: Request) {
     console.error("Erreur détaillée:", {
       message: error.message,
       stack: error.stack,
-      name: error.name
+      name: error.name,
     });
-    
-    const errorMessage = error.message || "Erreur lors du traitement de la requête";
+
+    const errorMessage =
+      error.message || "Erreur lors du traitement de la requête";
     return NextResponse.json(
-      { 
+      {
         error: errorMessage,
-        details: error.stack
+        details: error.stack,
       },
       { status: error.status || 500 }
     );
