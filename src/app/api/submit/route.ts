@@ -4,12 +4,25 @@ import { google } from "googleapis";
 
 export async function POST(request: Request) {
   try {
+    // Vérifier les variables d'environnement requises
+    if (!process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL) {
+      throw new Error("GOOGLE_SERVICE_ACCOUNT_EMAIL non configuré");
+    }
+    if (!process.env.GOOGLE_PRIVATE_KEY) {
+      throw new Error("GOOGLE_PRIVATE_KEY non configuré");
+    }
+    if (!process.env.GOOGLE_SHEET_ID) {
+      throw new Error("GOOGLE_SHEET_ID non configuré");
+    }
+
     const data = await request.json();
     console.log("Données reçues:", data);
 
-    // Vérifier les variables d'environnement
-    console.log("Email:", process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL);
-    console.log("Sheet ID:", process.env.GOOGLE_SHEET_ID);
+    console.log("Variables d'environnement présentes:", {
+      hasEmail: !!process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
+      hasKey: !!process.env.GOOGLE_PRIVATE_KEY,
+      hasSheetId: !!process.env.GOOGLE_SHEET_ID
+    });
 
     // Configurer l'authentification
     const auth = new google.auth.GoogleAuth({
@@ -111,11 +124,18 @@ export async function POST(request: Request) {
 
     return NextResponse.json({ success: true });
   } catch (error: any) {
-    console.error("Erreur lors de la soumission du formulaire:", error);
-    const errorMessage =
-      error.message || "Erreur lors du traitement de la requête";
+    console.error("Erreur détaillée:", {
+      message: error.message,
+      stack: error.stack,
+      name: error.name
+    });
+    
+    const errorMessage = error.message || "Erreur lors du traitement de la requête";
     return NextResponse.json(
-      { error: errorMessage },
+      { 
+        error: errorMessage,
+        details: error.stack
+      },
       { status: error.status || 500 }
     );
   }

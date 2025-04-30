@@ -73,7 +73,8 @@ export default function PrestationQuoteForm({
       });
 
       if (!response.ok) {
-        throw new Error("Erreur réseau");
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Erreur serveur');
       }
 
       alert("Message envoyé avec succès");
@@ -88,9 +89,10 @@ export default function PrestationQuoteForm({
       });
       closeModal();
       router.push("/merci");
-    } catch (error) {
+    } catch (error: any) {
       console.error("Erreur lors de l'envoi:", error);
-      alert("Erreur lors de l'envoi du message");
+      const errorMessage = error.message || "Erreur lors de l'envoi du message";
+      alert(`Erreur: ${errorMessage}`);
     } finally {
       setLoading(false);
     }
