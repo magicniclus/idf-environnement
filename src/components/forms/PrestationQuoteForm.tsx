@@ -48,6 +48,7 @@ export default function PrestationQuoteForm({
   ) : null;
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
+    prenom: "",
     nom: "",
     email: "",
     telephone: "",
@@ -77,6 +78,7 @@ export default function PrestationQuoteForm({
 
       alert("Message envoyé avec succès");
       setFormData({
+        prenom: "",
         nom: "",
         email: "",
         telephone: "",
@@ -111,9 +113,9 @@ export default function PrestationQuoteForm({
               <Input
                 id="firstname"
                 placeholder="Votre prénom"
-                value={formData.nom}
+                value={formData.prenom}
                 onChange={(e) =>
-                  setFormData({ ...formData, nom: e.target.value })
+                  setFormData({ ...formData, prenom: e.target.value })
                 }
                 required
               />
