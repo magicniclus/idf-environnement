@@ -32,7 +32,7 @@ export default function PhoneNumber() {
   if (isMobile) {
     return (
       <a
-        href="tel:0811360027"
+        href="tel:0644646953"
         className="fixed bottom-4 right-4 z-50 bg-yellow-500 text-white p-3 rounded-full shadow-lg hover:bg-yellow-600 transition-colors"
       >
         <PhoneIcon className="h-6 w-6" />
@@ -46,11 +46,11 @@ export default function PhoneNumber() {
     <div className="fixed top-[110px] right-20 z-40 bg-slate-100 text-slate-900 py-2 px-4 rounded-lg shadow-lg">
       <div className="flex flex-col items-end">
         <Link
-          href="tel:0811360027"
+          href="tel:0644646953"
           className="text-lg font-bold hover:underline flex items-center space-x-2 text-green-500"
         >
-          <PhoneCallIcon className="w-5 h-5 mr-2 text-green-500" /> 0 811 36 00
-          27
+          <PhoneCallIcon className="w-5 h-5 mr-2 text-green-500" /> 06 44 64 69
+          53
         </Link>
         <p className="text-xs">Service d&apos;un appel gratuit</p>
         <p className="text-[8px]">Du lundi au vendredi de 8h30 à 19h</p>
