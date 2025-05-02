@@ -102,11 +102,11 @@ export default function Faq() {
                 du lundi au vendredi de 8h30 à 19h
               </p>
               <a
-                href="tel:0811360027"
+                href="tel:0644646953"
                 className="flex items-center space-x-2 mt-3 text-green-500"
               >
                 <PhoneCallIcon className="w-5 h-5" />
-                <span className="text-2xl font-bold">0 811 36 00 27</span>
+                <span className="text-2xl font-bold">06 44 64 69 53</span>
               </a>
               <p className="text-sm text-slate-600">Service Gratuit</p>
             </div>
