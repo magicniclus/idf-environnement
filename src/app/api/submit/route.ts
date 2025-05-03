@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { google } from "googleapis";
 import { NextResponse } from "next/server";
 
@@ -110,33 +109,6 @@ export async function POST(request: Request) {
     const sheets = google.sheets({ version: "v4", auth });
     console.log("Auth configurée");
 
-    // Vérifier si la feuille Accueil existe
-    try {
-      await sheets.spreadsheets.get({
-        spreadsheetId: process.env.GOOGLE_SHEET_ID,
-        ranges: ["Accueil!A1:A1"],
-      });
-    } catch (error: any) {
-      if (error.code === 404) {
-        console.log("La feuille Accueil n'existe pas, création...");
-        // Si la feuille n'existe pas, la créer
-        await sheets.spreadsheets.batchUpdate({
-          spreadsheetId: process.env.GOOGLE_SHEET_ID,
-          requestBody: {
-            requests: [
-              {
-                addSheet: {
-                  properties: {
-                    title: "Accueil",
-                  },
-                },
-              },
-            ],
-          },
-        });
-      }
-    }
-
     // Préparer les données
     const values = [
       [
@@ -152,15 +124,37 @@ export async function POST(request: Request) {
     ];
 
     console.log("Tentative d'ajout des données...");
-    // Vérifier si les en-têtes existent
-    const headers = await sheets.spreadsheets.values.get({
+
+    // Récupérer la liste des feuilles
+    const spreadsheet = await sheets.spreadsheets.get({
       spreadsheetId: process.env.GOOGLE_SHEET_ID,
-      range: "Accueil!A1:H1",
     });
 
-    if (!headers.data.values || headers.data.values.length === 0) {
-      // Ajouter les en-têtes si elles n'existent pas
-      await sheets.spreadsheets.values.append({
+    // Vérifier si la feuille Accueil existe
+    const accueilSheet = spreadsheet.data.sheets?.find(
+      (sheet) => sheet.properties?.title === "Accueil"
+    );
+
+    // Si la feuille n'existe pas, la créer
+    if (!accueilSheet) {
+      console.log("La feuille Accueil n'existe pas, création...");
+      await sheets.spreadsheets.batchUpdate({
+        spreadsheetId: process.env.GOOGLE_SHEET_ID,
+        requestBody: {
+          requests: [
+            {
+              addSheet: {
+                properties: {
+                  title: "Accueil",
+                },
+              },
+            },
+          ],
+        },
+      });
+
+      // Ajouter les en-têtes immédiatement après la création
+      await sheets.spreadsheets.values.update({
         spreadsheetId: process.env.GOOGLE_SHEET_ID,
         range: "Accueil!A1:H1",
         valueInputOption: "USER_ENTERED",
@@ -179,6 +173,40 @@ export async function POST(request: Request) {
           ],
         },
       });
+    } else {
+      // Vérifier si les en-têtes existent
+      try {
+        const headers = await sheets.spreadsheets.values.get({
+          spreadsheetId: process.env.GOOGLE_SHEET_ID,
+          range: "Accueil!A1:H1",
+        });
+
+        if (!headers.data.values || headers.data.values.length === 0) {
+          // Ajouter les en-têtes si elles n'existent pas
+          await sheets.spreadsheets.values.update({
+            spreadsheetId: process.env.GOOGLE_SHEET_ID,
+            range: "Accueil!A1:H1",
+            valueInputOption: "USER_ENTERED",
+            requestBody: {
+              values: [
+                [
+                  "Date",
+                  "Prénom",
+                  "Nom",
+                  "Email",
+                  "Téléphone",
+                  "Code Postal",
+                  "Prestation",
+                  "Source",
+                ],
+              ],
+            },
+          });
+        }
+      } catch (error) {
+        console.error("Erreur lors de la vérification des en-têtes:", error);
+        // Continue même si la vérification des en-têtes échoue
+      }
     }
 
     // Ajouter les données à la feuille
