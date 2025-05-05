@@ -1,6 +1,7 @@
 import PhoneNumber from "@/components/phone/PhoneNumber";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -30,7 +31,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr">
-      <head />
+      <head>
+        <Script async src="https://www.googletagmanager.com/gtag/js?id=AW-17053760527" />
+        <Script id="google-analytics">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'AW-17053760527');
+          `}
+        </Script>
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
