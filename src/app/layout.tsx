@@ -32,15 +32,16 @@ export default function RootLayout({
   return (
     <html lang="fr">
       <head>
-        <Script async src="https://www.googletagmanager.com/gtag/js?id=AW-17053760527" />
-        <Script id="google-analytics">
-          {`
+        {/* Google tag (gtag.js) */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17053760527"></script>
+        <script dangerouslySetInnerHTML={{
+          __html: `
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
             gtag('config', 'AW-17053760527');
-          `}
-        </Script>
+          `
+        }} />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
