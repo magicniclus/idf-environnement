@@ -1,5 +1,6 @@
 import { google } from "googleapis";
 import { NextResponse } from "next/server";
+import { createContact } from '@/lib/hubspot';
 
 export async function POST(request: Request) {
   console.log('Début de la requête POST');
@@ -223,6 +224,20 @@ export async function POST(request: Request) {
     if (response.status !== 200) {
       throw new Error("Erreur lors de l'ajout des données");
     }
+
+    // Transformation des données pour HubSpot
+    const hubspotData = {
+      firstname: data.prenom,
+      lastname: data.nom,
+      email: data.email,
+      phone: data.telephone,
+      zip: data.codePostal,
+      travaux: data.prestation,
+      source: data.source
+    };
+
+    // Envoi des données à HubSpot
+    await createContact(hubspotData);
 
     return NextResponse.json({ success: true });
   } catch (error) {
