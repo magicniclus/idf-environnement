@@ -3,12 +3,14 @@
 import { Button } from "@/components/ui/button";
 import { CheckCircleIcon } from "@heroicons/react/24/outline";
 import { useRouter } from "next/navigation";
+import GoogleAdsConversion from "@/components/GoogleAdsConversion";
 
 export default function ThankYouPage() {
   const router = useRouter();
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+      <GoogleAdsConversion />
       <div className="max-w-md w-full space-y-8 text-center">
         <div className="flex justify-center">
           <CheckCircleIcon className="h-24 w-24 text-green-500" />
