@@ -10,8 +10,8 @@ const certificates = [
     alt: "RGE",
   },
   {
-    src: "/logo/certificat/domofiance.png",
-    alt: "Domofiance",
+    src: "/logo/certificat/arkea.png",
+    alt: "Arkea",
   },
   {
     src: "/logo/certificat/ffb.png",
