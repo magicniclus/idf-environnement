@@ -47,7 +47,7 @@ export default function Footer() {
                 className="flex items-center space-x-2 text-white hover:text-yellow-300 transition-colors group"
               >
                 <PhoneIcon className="w-5 h-5" />
-                <span className="text-2xl font-bold">0 811 36 00 27</span>
+                <span className="text-2xl font-bold">06 44 64 69 53</span>
               </a>
               <p className="text-sm text-slate-400">Service Gratuit</p>
             </div>
