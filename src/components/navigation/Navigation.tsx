@@ -1,6 +1,8 @@
 "use client";
 
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { useEffect, useState } from "react";
 
 const navItems = [
   {
@@ -18,6 +20,18 @@ const navItems = [
 ];
 
 export default function Navigation() {
+  const [showButton, setShowButton] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      setShowButton(scrollPosition > 200);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-sm border-b border-slate-200">
       <div className="max-w-5xl mx-auto px-4">
@@ -36,6 +50,17 @@ export default function Navigation() {
                 </Link>
               </li>
             ))}
+            {showButton && (
+              <li>
+                <Button
+                  asChild
+                  variant="slate"
+                  className="bg-green-500 text-white hover:bg-white hover:text-green-500 border-green-500 border transition-colors"
+                >
+                  <a href="#hero">Demander un devis</a>
+                </Button>
+              </li>
+            )}
           </ul>
           <button className="md:hidden">
             <svg

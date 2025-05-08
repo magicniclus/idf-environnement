@@ -1,8 +1,9 @@
 "use client";
 
-import QuoteForm from "@/components/forms/QuoteForm";
+import HeroQuoteForm from "@/components/forms/HeroQuoteForm";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import { motion } from "framer-motion";
+import { CheckIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -60,7 +61,7 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative min-h-screen h-min w-full">
+    <section className="relative min-h-screen h-min w-full" id="hero">
       {/* Background Image */}
       <div className="absolute inset-0 w-full h-full">
         <Image
@@ -163,13 +164,6 @@ const Hero = () => {
               >
                 FAQ
               </Link>
-              <QuoteForm
-                buttonClassName={`flex items-center justify-center gap-2 ${
-                  isScrolled
-                    ? ""
-                    : "text-white border-white hover:bg-white hover:text-slate-900"
-                }`}
-              />
             </div>
           </div>
 
@@ -203,68 +197,99 @@ const Hero = () => {
               >
                 FAQ
               </Link>
-              <QuoteForm buttonClassName="text-white border-white hover:bg-white hover:text-gray-900 mt-4" />
             </div>
           </div>
         </header>
       </div>
 
       {/* Hero Content */}
-      <div className="relative z-10 min-h-[calc(100vh-200px)] px-4 flex flex-col items-center justify-center text-center text-white p-4 md:mt-0 mt-7">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-          className="flex flex-col items-center space-y-2 mb-8 mt-2"
-        >
-          <div className="bg-white/30 px-3 py-1 rounded-full">
-            <div className="flex items-center space-x-2">
-              <span className="md:text-lg text-sm font-semibold">
-                Excellent
-              </span>
-              <div className="flex">
-                {[...Array(5)].map((_, i) => (
-                  <svg
-                    key={i}
-                    className="w-4 h-4 text-yellow-400"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                  </svg>
-                ))}
+      <div className="relative z-10 min-h-[calc(100vh-200px)] px-4 grid md:grid-cols-2 gap-8 items-center text-white p-4 md:mt-0 mt-7 max-w-5xl mx-auto">
+        {/* Left side - Content */}
+        <div className="flex flex-col md:items-start items-center md:text-left text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="flex flex-col md:items-start items-center space-y-2 mb-8 mt-2"
+          >
+            <div className="bg-white/30 px-3 py-1 rounded-full">
+              <div className="flex items-center space-x-2">
+                <span className="md:text-lg text-sm font-semibold">
+                  Excellent
+                </span>
+                <div className="flex">
+                  {[...Array(5)].map((_, i) => (
+                    <svg
+                      key={i}
+                      className="w-4 h-4 text-yellow-400"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                  ))}
+                </div>
               </div>
             </div>
-          </div>
-        </motion.div>
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
-          className="text-3xl md:text-5xl md:text-6xl font-bold mb-6 max-w-4xl"
-        >
-          <span className="md:block hidden">Rénovez votre maison avec</span> IDF
-          ENVIRONNEMENT
-        </motion.h1>
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: "easeOut", delay: 0.4 }}
-          className="md:text-xl text-sm md:text-2xl mb-4 max-w-2xl"
-        >
-          Isolation des murs exterieurs | des murs interieurs | de la toiture |
-          des sols | pompe à chaleur Air/air | pompe à chaleur Air/eau | ballon
-          thermodynamique sur toute la france
-        </motion.p>
+          </motion.div>
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
+            className="text-3xl md:text-5xl md:text-6xl font-bold mb-6 max-w-4xl"
+          >
+            <span className="md:block hidden text-2xl">
+              Rénovez votre maison avec
+            </span>{" "}
+            IDF ENVIRONNEMENT
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut", delay: 0.4 }}
+            className="md:text-xl text-sm md:text-2xl mb-6 max-w-2xl"
+          >
+            Isolation des murs exterieurs | des murs interieurs
+          </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut", delay: 0.6 }}
+            className="grid grid-cols-1 gap-4 text-sm md:text-base max-w-2xl"
+          >
+            <div className="flex items-center gap-2">
+              <CheckIcon className="h-5 w-5 text-green-400" />
+              <span>+ de 10 ans d&apos;expérience</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <CheckIcon className="h-5 w-5 text-green-400" />
+              <span>+ de 3000 réalisations</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <CheckIcon className="h-5 w-5 text-green-400" />
+              <span>97% de clients satisfaits</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <CheckIcon className="h-5 w-5 text-green-400" />
+              <span>Entreprise RGE</span>
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Right side - Form */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6, ease: "easeOut", delay: 0.6 }}
+          className="w-full max-w-md mx-auto md:mt-0 mt-8"
         >
-          <QuoteForm
-            withArrow
-            buttonClassName="flex items-center justify-center gap-2 mt-4"
-          />
+          <div className="bg-white/10 backdrop-blur-xl p-6 rounded-lg shadow-lg border border-white/20">
+            <h3 className="text-2xl font-semibold mb-6 text-center text-white">
+              Demandez un devis gratuit
+            </h3>
+            <HeroQuoteForm />
+          </div>
         </motion.div>
       </div>
 

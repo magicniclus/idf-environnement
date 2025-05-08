@@ -39,7 +39,7 @@ export default function Partenaires() {
             viewport={{ once: true }}
             className="text-4xl md:text-5xl font-bold text-slate-900 text-center mb-12"
           >
-            Ils nous ont fait <span className="text-yellow-500">confiance</span>
+            Nos <span className="text-yellow-500">partenaires</span>
           </motion.h2>
           <div className="flex justify-between items-center gap-8 flex-wrap md:flex-nowrap">
             {certificates.map((cert, index) => (

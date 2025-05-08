@@ -1,14 +1,12 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
 import PrestationQuoteForm from "@/components/forms/PrestationQuoteForm";
-import { useModalStore } from "@/store/useModalStore";
+import { Button } from "@/components/ui/button";
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
 } from "@/components/ui/carousel";
-import { ArrowRightIcon } from "@heroicons/react/24/outline";
 import AutoplayPlugin from "embla-carousel-autoplay";
 import { motion } from "framer-motion";
 import Image from "next/image";
@@ -38,7 +36,6 @@ const steps = [
 ];
 
 export default function Fonctionnement() {
-  const { openModal } = useModalStore();
   return (
     <section id="what" className="w-full bg-yellow-300 relative overflow-hidden">
       <div className="max-w-5xl mx-auto px-4 py-20 grid md:grid-cols-2 gap-8 items-center">
@@ -96,14 +93,12 @@ export default function Fonctionnement() {
                 viewport={{ once: true }}
               >
                 <Button
+                  asChild
                   variant="slate"
-                  className="w-fit mt-4 bg-slate-900 text-white hover:bg-white hover:text-slate-900 transition-colors"
-                  onClick={() => openModal("Estimation Projet")}
+                  className="w-full bg-green-500 text-white hover:bg-white hover:text-green-500 border-green-500 border transition-colors"
                 >
-                  J&apos;estime mon projet{" "}
-                  <ArrowRightIcon className="w-4 h-4 ml-2" />
+                  <a href="#hero">Demander un devis</a>
                 </Button>
-
               </motion.div>
             </div>
           </motion.div>

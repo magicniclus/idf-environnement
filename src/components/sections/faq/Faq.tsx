@@ -7,7 +7,6 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
-import { useModalStore } from "@/store/useModalStore";
 import { motion } from "framer-motion";
 import { PhoneCallIcon } from "lucide-react";
 
@@ -35,7 +34,6 @@ const faqItems = [
 ];
 
 export default function Faq() {
-  const { openModal } = useModalStore();
 
   return (
     <motion.section
@@ -112,11 +110,11 @@ export default function Faq() {
             </div>
             <div className="pt-4">
               <Button
-                onClick={() => openModal("Question Projet")}
+                asChild
                 variant="slate"
                 className="w-full bg-green-500 text-white hover:bg-white hover:text-green-500 border-green-500 border transition-colors"
               >
-                Demander un devis
+                <a href="#hero">Demander un devis</a>
               </Button>
             </div>
           </motion.div>

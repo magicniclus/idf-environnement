@@ -1,7 +1,6 @@
 "use client";
 
 import PrestationQuoteForm from "@/components/forms/PrestationQuoteForm";
-import { useModalStore } from "@/store/useModalStore";
 import { ArrowRightIcon } from "@heroicons/react/24/outline";
 import { motion } from "framer-motion";
 
@@ -57,7 +56,6 @@ const prestations = [
 ];
 
 export default function Prestation() {
-  const { openModal } = useModalStore();
   return (
     <section id="prestations" className="w-full py-20 bg-white">
       <div className="max-w-5xl mx-auto px-4">
@@ -96,8 +94,8 @@ export default function Prestation() {
               transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
             >
-              <button
-                onClick={() => openModal(prestation.title)}
+              <a
+                href="#hero"
                 className={`block w-full p-6 rounded-2xl ${prestation.color} transition-colors duration-200 group h-full flex flex-col`}
               >
                 <div className="flex-1 flex md:flex-col justify-between md:items-center justify-between items-end">
@@ -113,7 +111,7 @@ export default function Prestation() {
                     <ArrowRightIcon className="md:w-5 md:h-5 w-8 h-8 text-slate-600 group-hover:translate-x-1 transition-transform duration-200" />
                   </div>
                 </div>
-              </button>
+              </a>
             </motion.div>
           ))}
         </div>
