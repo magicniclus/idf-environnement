@@ -43,7 +43,7 @@ export default function Footer() {
                 du lundi au vendredi de 8h30 à 19h
               </p>
               <a
-                href="tel:0811360027"
+                href="tel:0644646953"
                 className="flex items-center space-x-2 text-white hover:text-yellow-300 transition-colors group"
               >
                 <PhoneIcon className="w-5 h-5" />
