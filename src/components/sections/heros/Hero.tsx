@@ -256,7 +256,7 @@ const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: "easeOut", delay: 0.6 }}
-            className="grid md:grid-cols-1 grid-cols-2 gap-4 text-sm md:text-base max-w-2xl"
+            className="grid md:grid-cols-1 grid-cols-1 gap-4 text-sm md:text-base max-w-2xl"
           >
             <div className="flex items-center gap-2">
               <CheckIcon className="h-5 w-5 text-green-400" />
