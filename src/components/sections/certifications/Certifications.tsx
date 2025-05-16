@@ -9,6 +9,11 @@ const certificates = [
     src: "/logo/certificat/RGE.avif",
     alt: "RGE",
   },
+
+  {
+    src: "/logo/certificat/totalEnergies.png",
+    alt: "Total Energie",
+  },
   {
     src: "/logo/certificat/arkea.png",
     alt: "Arkea",
@@ -16,10 +21,6 @@ const certificates = [
   {
     src: "/logo/certificat/ffb.png",
     alt: "FFB",
-  },
-  {
-    src: "/logo/certificat/financo.png",
-    alt: "Financo",
   },
 ];
 
