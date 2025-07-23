@@ -675,7 +675,7 @@ const SimulatorForm = ({ currentStep, setCurrentStep }: SimulatorFormProps) => {
             {currentStep === 1 && (
               <div className="mt-6 w-full">
                 <div className="flex flex-col items-center">
-                  <div className="text-xs text-gray-500 mb-4 flex flex-col items-center">
+                  <div className="text-xs text-gray-500 mb-4 flex flex-col items-center md:text-start text-center">
                     <p>J'ai déjà un compte Idf Environnement:</p>
                     <button className="text-blue-600 text-xs font-medium flex items-center">
                       Me connecter <ChevronRight className="h-3 w-3 ml-1" />

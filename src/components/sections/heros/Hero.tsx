@@ -472,8 +472,8 @@ const Hero = () => {
             className="mt-10 mb-16"
           >
             <Link 
-              href="/contact"
-              className="px-6 py-4 bg-yellow-500 text-white rounded-md text-xl font-medium hover:bg-white hover:text-[#FFDE59] border border-[#FFDE59] transition-colors duration-300"
+              href="/simuler-mes-aides"
+              className="px-6 py-4 bg-yellow-500 text-white rounded-md md:text-xl text-sm font-medium hover:bg-white hover:text-[#FFDE59] border border-[#FFDE59] transition-colors duration-300"
             >
               🏠  Je démarre un projet d&apos;isolation
             </Link>
