@@ -1,14 +1,12 @@
 "use client";
 
-import HeroQuoteForm from "@/components/forms/HeroQuoteForm";
-import { ChevronDownIcon, ArrowRightIcon } from "@heroicons/react/24/outline";
+import { useEffect, useRef, useState } from "react";
+import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
 
-const Hero = () => {
+const HeroContact = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [prestationsMenuOpen, setPrestationsMenuOpen] = useState(false);
@@ -81,32 +79,9 @@ const Hero = () => {
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
-  return (
-    <section className="relative min-h-screen h-min w-full" id="hero">
-      {/* Background Image */}
-      <div className="absolute inset-0 w-full h-full">
-        <Image
-          src="/background/hero2.png"
-          alt="Background"
-          fill
-          className="object-cover"
-          priority
-        />
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-black/50" />
-        
-        {/* Wave SVG */}
-        <div className="absolute bottom-0 left-0 right-0 w-full overflow-hidden z-10">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 200" className="w-full" style={{ display: 'block', height: '150px' }} preserveAspectRatio="none">
-            <path 
-              fill="#FFDE59" 
-              fillOpacity="1" 
-              d="M0,32L48,53.3C96,75,192,117,288,122.7C384,128,480,96,576,80C672,64,768,64,864,80C960,96,1056,128,1152,138.7C1248,149,1344,139,1392,133.3L1440,128L1440,200L1392,200C1344,200,1248,200,1152,200C1056,200,960,200,864,200C768,200,672,200,576,200C480,200,384,200,288,200C192,200,96,200,48,200L0,200Z"
-            ></path>
-          </svg>
-        </div>
-      </div>
 
+  return (
+    <>
       {/* Navigation */}
       <div
         className={`w-full z-50 transition-all duration-300 ${
@@ -123,11 +98,11 @@ const Hero = () => {
           }`}
         >
           <div className="flex justify-between items-center">
-            {/* Logo */}
+            {/* Logo - Toujours noir sur la page contact */}
             <Link href="/" className="z-50 relative">
               <div className="flex items-center space-x-2">
                 <Image
-                  src={isScrolled ? "/logo/logo-black.png" : "/logo/logo.png"}
+                  src="/logo/logo-black.png"
                   alt="IDF Environnement"
                   width={isScrolled ? 60 : 80}
                   height={isScrolled ? 60 : 80}
@@ -140,7 +115,7 @@ const Hero = () => {
             <nav className="hidden md:flex items-center space-x-8">
               <Link
                 href="/"
-                className={`text-${isScrolled ? "slate-900" : "white"} hover:text-yellow-500 transition-colors`}
+                className="text-slate-700 hover:text-slate-900 transition-colors"
               >
                 Accueil
               </Link>
@@ -152,7 +127,7 @@ const Hero = () => {
                     setPrestationsMenuOpen(!prestationsMenuOpen);
                     setAidesMenuOpen(false);
                   }}
-                  className={`flex items-center font-medium transition-colors hover:text-yellow-500 ${isScrolled ? "text-slate-600 hover:text-slate-900" : "text-white hover:text-slate-200"}`}
+                  className="flex items-center font-medium transition-colors hover:text-yellow-500 text-slate-700 hover:text-slate-900"
                 >
                   Nos prestations
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" viewBox="0 0 20 20" fill="currentColor">
@@ -241,7 +216,7 @@ const Hero = () => {
                     setAidesMenuOpen(!aidesMenuOpen);
                     setPrestationsMenuOpen(false);
                   }}
-                  className={`flex items-center font-medium transition-colors hover:text-yellow-500 ${isScrolled ? "text-slate-600 hover:text-slate-900" : "text-white hover:text-slate-200"}`}
+                  className="flex items-center font-medium transition-colors hover:text-yellow-500 text-slate-700 hover:text-slate-900"
                 >
                   Aides
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" viewBox="0 0 20 20" fill="currentColor">
@@ -308,10 +283,7 @@ const Hero = () => {
               
               <Link
                 href="/contact"
-                className={`font-medium transition-colors hover:text-yellow-500 ${isScrolled 
-                  ? "text-slate-600 hover:text-slate-900"
-                  : "text-white hover:text-slate-200"
-                }`}
+                className="font-medium transition-colors hover:text-yellow-500 text-slate-700 hover:text-slate-900"
               >
                 Contact
               </Link>
@@ -331,9 +303,9 @@ const Hero = () => {
               aria-label="Toggle menu"
             >
               {isMenuOpen ? (
-                <XMarkIcon className={`h-8 w-8 text-${isScrolled ? "slate-900" : "white"}`} />
+                <XMarkIcon className="h-8 w-8 text-slate-900" />
               ) : (
-                <Bars3Icon className={`h-8 w-8 text-${isScrolled ? "slate-900" : "white"}`} />
+                <Bars3Icon className="h-8 w-8 text-slate-900" />
               )}
             </button>
           </div>
@@ -417,132 +389,8 @@ const Hero = () => {
           </div>
         )}
       </div>
-
-      {/* Hero Content */}
-      <div className="relative z-10 min-h-[calc(100vh-400px)] px-4 flex flex-col justify-center items-center text-white p-4 md:mt-0 max-w-5xl mx-auto">
-        {/* Centered Content */}
-        <div className="flex flex-col items-center text-center max-w-3xl">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-            className="flex flex-col md:items-start items-center space-y-2 mb-8 mt-2"
-          >
-            <div className="bg-white/30 px-3 py-1 rounded-full">
-              <div className="flex items-center space-x-2">
-                <span className="md:text-lg text-sm font-semibold">
-                  Excellent
-                </span>
-                <div className="flex">
-                  {[...Array(5)].map((_, i) => (
-                    <svg
-                      key={i}
-                      className="w-4 h-4 text-yellow-400"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                    >
-                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                    </svg>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </motion.div>
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
-            className="text-3xl md:text-7xl font-bold mb-6 max-w-4xl"
-          >
-            On s'occupe de tout
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut", delay: 0.4 }}
-            className="md:text-xl text-sm md:text-2xl mb-6 max-w-2xl"
-          >
-            ITE (Isolation des murs exterieurs) | Isolation des combles
-          </motion.p>
-          
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut", delay: 0.8 }}
-            className="mt-10 mb-16"
-          >
-            <Link 
-              href="/contact"
-              className="px-6 py-4 bg-yellow-500 text-white rounded-md text-xl font-medium hover:bg-white hover:text-[#FFDE59] border border-[#FFDE59] transition-colors duration-300"
-            >
-              🏠  Je démarre un projet d&apos;isolation
-            </Link>
-          </motion.div>
-          
-          {/* Cards */}
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut", delay: 1.0 }}
-            className="grid md:grid-cols-2 grid-cols-1 gap-8 w-full max-w-2xl mt-10"
-          >
-            {/* Isolation Card */}
-            <Link href="/isolation-murs-exterieurs" className="group">
-              <div className="bg-white p-6 rounded-lg shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 flex flex-col items-center text-center h-full">
-                <div className="relative w-32 h-32 mb-4">
-                  <Image 
-                    src="/illustrations/house.png" 
-                    alt="Isolation" 
-                    fill 
-                    className="object-contain"
-                  />
-                </div>
-                <h3 className="text-xl font-semibold mb-2 text-slate-900">Isolation</h3>
-                <div className="flex items-center justify-center mt-2 group-hover:translate-x-2 transition-transform duration-300 text-slate-900">
-                  <span className="mr-2">En savoir plus</span>
-                  <ArrowRightIcon className="h-5 w-5" />
-                </div>
-              </div>
-            </Link>
-            
-            {/* Aides Card */}
-            <Link href="/simuler-mes-aides" className="group">
-              <div className="bg-white p-6 rounded-lg shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 flex flex-col items-center text-center h-full">
-                <div className="relative w-32 h-32 mb-4">
-                  <Image 
-                    src="/illustrations/aides.png" 
-                    alt="Aides" 
-                    fill 
-                    className="object-contain"
-                  />
-                </div>
-                <h3 className="text-xl font-semibold mb-2 text-slate-900">Aides</h3>
-                <div className="flex items-center justify-center mt-2 group-hover:translate-x-2 transition-transform duration-300 text-slate-900">
-                  <span className="mr-2">En savoir plus</span>
-                  <ArrowRightIcon className="h-5 w-5" />
-                </div>
-              </div>
-            </Link>
-          </motion.div>
-        </div>
-      </div>
-
-      {/* Floating arrow */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: "easeOut", delay: 0.8 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2"
-      >
-        <ChevronDownIcon
-          className="w-8 h-8 text-white animate-bounce opacity-75 hover:opacity-100 transition-opacity cursor-pointer"
-          onClick={() =>
-            window.scrollTo({ top: window.innerHeight, behavior: "smooth" })
-          }
-        />
-      </motion.div>
-    </section>
+    </>
   );
 };
 
-export default Hero;
+export default HeroContact;

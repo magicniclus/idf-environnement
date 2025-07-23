@@ -119,26 +119,28 @@ export async function POST(request: Request) {
         data.email || "",
         data.telephone || "",
         data.codePostal || "",
-        data.prestation || "",
+        data.projectType || "", // Type de logement (maison, appartement)
+        data.buildingAge || "", // Âge du bien
+        data.workType || "",   // Type de travaux
+        data.surfaceArea || "", // Surface en m²
         data.source || "Site Web",
       ],
     ];
 
     console.log("Tentative d'ajout des données...");
 
-    // Récupérer la liste des feuilles
+    // Vérifier si la feuille "Simulateur IDF" existe
     const spreadsheet = await sheets.spreadsheets.get({
       spreadsheetId: process.env.GOOGLE_SHEET_ID,
     });
 
-    // Vérifier si la feuille Accueil existe
-    const accueilSheet = spreadsheet.data.sheets?.find(
-      (sheet) => sheet.properties?.title === "Accueil"
+    const simulateurSheet = spreadsheet.data.sheets?.find(
+      (sheet) => sheet.properties?.title === "Simulateur IDF"
     );
 
     // Si la feuille n'existe pas, la créer
-    if (!accueilSheet) {
-      console.log("La feuille Accueil n'existe pas, création...");
+    if (!simulateurSheet) {
+      console.log("La feuille Simulateur IDF n'existe pas, création...");
       await sheets.spreadsheets.batchUpdate({
         spreadsheetId: process.env.GOOGLE_SHEET_ID,
         requestBody: {
@@ -146,7 +148,7 @@ export async function POST(request: Request) {
             {
               addSheet: {
                 properties: {
-                  title: "Accueil",
+                  title: "Simulateur IDF",
                 },
               },
             },
@@ -157,7 +159,7 @@ export async function POST(request: Request) {
       // Ajouter les en-têtes immédiatement après la création
       await sheets.spreadsheets.values.update({
         spreadsheetId: process.env.GOOGLE_SHEET_ID,
-        range: "Accueil!A1:H1",
+        range: "Simulateur IDF!A1:K1",
         valueInputOption: "USER_ENTERED",
         requestBody: {
           values: [
@@ -168,7 +170,10 @@ export async function POST(request: Request) {
               "Email",
               "Téléphone",
               "Code Postal",
-              "Prestation",
+              "Type de Logement",
+              "Âge du Bien",
+              "Type de Travaux",
+              "Surface (m²)",
               "Source",
             ],
           ],
@@ -179,14 +184,14 @@ export async function POST(request: Request) {
       try {
         const headers = await sheets.spreadsheets.values.get({
           spreadsheetId: process.env.GOOGLE_SHEET_ID,
-          range: "Accueil!A1:H1",
+          range: "Simulateur IDF!A1:K1",
         });
 
         if (!headers.data.values || headers.data.values.length === 0) {
           // Ajouter les en-têtes si elles n'existent pas
           await sheets.spreadsheets.values.update({
             spreadsheetId: process.env.GOOGLE_SHEET_ID,
-            range: "Accueil!A1:H1",
+            range: "Simulateur IDF!A1:K1",
             valueInputOption: "USER_ENTERED",
             requestBody: {
               values: [
@@ -197,7 +202,10 @@ export async function POST(request: Request) {
                   "Email",
                   "Téléphone",
                   "Code Postal",
-                  "Prestation",
+                  "Type de Logement",
+                  "Âge du Bien",
+                  "Type de Travaux",
+                  "Surface (m²)",
                   "Source",
                 ],
               ],
@@ -213,7 +221,7 @@ export async function POST(request: Request) {
     // Ajouter les données à la feuille
     const response = await sheets.spreadsheets.values.append({
       spreadsheetId: process.env.GOOGLE_SHEET_ID,
-      range: "Accueil!A:H",
+      range: "Simulateur IDF!A:K",
       valueInputOption: "USER_ENTERED",
       requestBody: {
         values,
@@ -232,12 +240,26 @@ export async function POST(request: Request) {
       email: data.email,
       phone: data.telephone,
       zip: data.codePostal,
-      travaux: data.prestation,
+      travaux: data.workType || data.projectType || "", // Garder la compatibilité avec le champ existant
       source: data.source
     };
+    
+    // Ajouter des champs personnalisés si nécessaire dans le futur
+    // Ces données sont déjà dans Google Sheets
 
     // Envoi des données à HubSpot
-    await createContact(hubspotData);
+    try {
+      await createContact(hubspotData);
+      console.log("Contact créé ou mis à jour dans HubSpot avec succès");
+    } catch (hubspotError) {
+      // Si l'erreur est un conflit (contact existe déjà), on continue sans échec
+      if (hubspotError instanceof Error && hubspotError.message.includes('409')) {
+        console.log("Contact déjà existant dans HubSpot, continuons sans erreur");
+      } else {
+        // On log l'erreur mais on ne fait pas échouer la requête
+        console.error("Erreur non bloquante avec HubSpot:", hubspotError);
+      }
+    }
 
     return NextResponse.json({ success: true });
   } catch (error) {

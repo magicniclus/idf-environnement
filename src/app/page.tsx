@@ -1,4 +1,5 @@
 import Certifications from "@/components/sections/certifications/Certifications";
+import Etapes from "@/components/sections/etapes/Etapes";
 import Faq from "@/components/sections/faq/Faq";
 import Fonctionnement from "@/components/sections/fonctionnement/Fonctionnement";
 import Footer from "@/components/sections/footer/Footer";
@@ -13,6 +14,7 @@ export default function Home() {
       <Certifications />
       <Fonctionnement />
       <Prestation />
+      <Etapes />
       <Partenaires />
       <Faq />
       <Footer />

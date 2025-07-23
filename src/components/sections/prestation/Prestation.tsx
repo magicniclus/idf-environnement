@@ -7,51 +7,24 @@ import { motion } from "framer-motion";
 const prestations = [
   {
     id: 1,
-    title: "ITE",
-    description: "Isolation thermique des murs par l'extérieur",
-
-    color: "bg-blue-100 hover:bg-blue-200",
-    href: "/ite",
-  },
-  {
-    id: 2,
     title: "ITI",
     description: "Isolation thermique des murs par l'intérieur",
-
     color: "bg-green-100 hover:bg-green-200",
     href: "/iti",
   },
   {
+    id: 2,
+    title: "Isolation des combles",
+    description: "Isolation thermique des combles perdus ou aménagés",
+    color: "bg-blue-100 hover:bg-blue-200",
+    href: "/isolation-combles",
+  },
+  {
     id: 3,
-    title: "Isolation toiture",
-    description: "Isolation thermique de la toiture",
-
-    color: "bg-red-100 hover:bg-red-200",
-    href: "/isolation-toiture",
-  },
-  {
-    id: 4,
-    title: "PAC Air/Air",
-    description: "Pompe à chaleur air/air",
-
+    title: "Aides financières",
+    description: "CEE, MaPrimeRénov' et autres dispositifs",
     color: "bg-yellow-100 hover:bg-yellow-200",
-    href: "/pac-air-air",
-  },
-  {
-    id: 5,
-    title: "PAC Air/Eau",
-    description: "Pompe à chaleur air/eau",
-
-    color: "bg-purple-100 hover:bg-purple-200",
-    href: "/pac-air-eau",
-  },
-  {
-    id: 6,
-    title: "PAC Thermodynamique",
-    description: "Pompe à chaleur thermodynamique",
-
-    color: "bg-cyan-100 hover:bg-cyan-200",
-    href: "/pac-thermodynamique",
+    href: "/simuler-mes-aides",
   },
 ];
 

@@ -32,15 +32,6 @@ export default function Partenaires() {
     <>
       <section className="w-full bg-white hidden md:block">
         <div className="max-w-5xl mx-auto px-4 py-8">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="text-4xl md:text-5xl font-bold text-slate-900 text-center mb-12"
-          >
-            Nos <span className="text-yellow-500">partenaires</span>
-          </motion.h2>
           <div className="flex justify-between items-center gap-8 flex-wrap md:flex-nowrap">
             {certificates.map((cert, index) => (
               <motion.div

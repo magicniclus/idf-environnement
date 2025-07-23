@@ -27,7 +27,7 @@ const certificates = [
 export default function Certifications() {
   return (
     <>
-      <section className="w-full bg-yellow-300 hidden md:block">
+      <section className="w-full bg-[#FFDE59] hidden md:block">
         <div className="max-w-5xl mx-auto px-4 py-8">
           <div className="flex justify-between items-center gap-8 flex-wrap md:flex-nowrap">
             {certificates.map((cert, index) => (

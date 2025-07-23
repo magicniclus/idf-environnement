@@ -42,7 +42,7 @@ export default function Faq() {
       transition={{ duration: 0.3 }}
       viewport={{ once: true }}
       id="faq"
-      className="w-full bg-slate-50 py-20"
+      className="w-full py-20"
     >
       <div className="max-w-5xl mx-auto px-4">
         <div className="space-y-8 mb-12">

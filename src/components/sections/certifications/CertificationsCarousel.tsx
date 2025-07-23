@@ -30,14 +30,14 @@ const certificates = [
 
 export default function CertificationsCarousel() {
   return (
-    <section className="w-full bg-yellow-300 md:hidden overflow-hidden">
+    <section className="w-full bg-[#FFDE59] md:hidden overflow-hidden">
       <div className="max-w-5xl mx-auto px-8 py-8">
         <Carousel
           opts={{
             align: "center",
             loop: true,
           }}
-          className="w-full max-w-[200px] mx-auto relative"
+          className="w-full max-w-[200px] mx-auto relative mt-10"
         >
           <CarouselContent>
             {certificates.map((cert) => (

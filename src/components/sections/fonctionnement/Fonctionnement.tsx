@@ -37,7 +37,7 @@ const steps = [
 
 export default function Fonctionnement() {
   return (
-    <section id="what" className="w-full bg-yellow-300 relative overflow-hidden">
+    <section id="what" className="w-full bg-[#FFDE59] relative overflow-hidden">
       <div className="max-w-5xl mx-auto px-4 py-20 grid md:grid-cols-2 gap-8 items-center">
         {/* Left Content */}
         <div className="space-y-8">

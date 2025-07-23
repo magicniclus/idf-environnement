@@ -43,17 +43,21 @@ export default function PhoneNumber() {
   if (!isScrolled) return null;
 
   return (
-    <div className="fixed top-[110px] right-20 z-40 bg-slate-100 text-slate-900 py-2 px-4 rounded-lg shadow-lg">
-      <div className="flex flex-col items-end">
-        <Link
-          href="tel:0644646953"
-          className="text-lg font-bold hover:underline flex items-center space-x-2 text-green-500"
-        >
-          <PhoneCallIcon className="w-5 h-5 mr-2 text-green-500" /> 06 44 64 69
-          53
-        </Link>
-        <p className="text-xs">Service d&apos;un appel gratuit</p>
-        <p className="text-[8px]">Du lundi au vendredi de 8h30 à 19h</p>
+    <div className="fixed top-[110px] right-0 z-40 w-full max-w-6xl mx-auto left-1/2 transform -translate-x-1/2">
+      <div className="flex justify-end w-full">
+        <div className="bg-slate-100 text-slate-900 py-2 px-4 rounded-lg shadow-lg">
+          <div className="flex flex-col items-end">
+            <Link
+              href="tel:0644646953"
+              className="text-lg font-bold hover:underline flex items-center space-x-2 text-green-500"
+            >
+              <PhoneCallIcon className="w-5 h-5 mr-2 text-green-500" /> 06 44 64 69
+              53
+            </Link>
+            <p className="text-xs">Service d&apos;un appel gratuit</p>
+            <p className="text-[8px]">Du lundi au vendredi de 8h30 à 19h</p>
+          </div>
+        </div>
       </div>
     </div>
   );
