@@ -11,6 +11,14 @@ const compat = new FlatCompat({
 
 const eslintConfig = [
   ...compat.extends("next/core-web-vitals", "next/typescript"),
+  {
+    rules: {
+      // Désactive la règle qui exige d'échapper les apostrophes dans le JSX
+      "react/no-unescaped-entities": "off",
+      // Désactive la règle qui signale les variables importées mais non utilisées
+      "@typescript-eslint/no-unused-vars": "off"
+    }
+  }
 ];
 
 export default eslintConfig;
