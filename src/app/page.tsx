@@ -15,7 +15,7 @@ export default function Home() {
       <Certifications />
       <Fonctionnement />
       <Prestation />
-      <div className="mb-10">
+      <div className="mb-10 px-4">
       <ImageComparison beforeImage="/prestations/four-reno.jpeg" afterImage="/prestations/four.jpeg" />
       </div>
       <Etapes />
