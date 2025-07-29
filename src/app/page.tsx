@@ -1,3 +1,4 @@
+import ImageComparison from "@/components/ImageComparaison";
 import Certifications from "@/components/sections/certifications/Certifications";
 import Etapes from "@/components/sections/etapes/Etapes";
 import Faq from "@/components/sections/faq/Faq";
@@ -14,6 +15,9 @@ export default function Home() {
       <Certifications />
       <Fonctionnement />
       <Prestation />
+      <div className="mb-10">
+      <ImageComparison beforeImage="/prestations/four-reno.jpeg" afterImage="/prestations/four.jpeg" />
+      </div>
       <Etapes />
       <Partenaires />
       <Faq />

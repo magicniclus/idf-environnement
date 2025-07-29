@@ -4,6 +4,7 @@ import Link from "next/link";
 import HeroContact from "@/components/sections/heros/HeroContact";
 import Footer from "@/components/sections/footer/Footer";
 import { ArrowRightIcon } from "@heroicons/react/24/outline";
+import ImageComparison from "@/components/ImageComparaison";
 
 export const metadata = {
   title: "Isolation Thermique par l'Extérieur (ITE) | IDF Environnement",
@@ -123,21 +124,10 @@ export default function IsolationMursExterieurs() {
                     Cette technique est particulièrement adaptée aux bâtiments anciens dont les murs présentent des déperditions thermiques importantes, mais également aux constructions plus récentes nécessitant une amélioration de leur performance énergétique pour répondre aux exigences actuelles en matière d'économies d'énergie et de confort.
                   </p>
                   
-                  <div className="flex justify-center mb-8">
-                    <div className="relative w-full max-w-2xl h-64 rounded-lg overflow-hidden">
-                      <Image 
-                        src="/houses/maison-4.png" 
-                        alt="Isolation thermique par l'extérieur d'une maison" 
-                        fill
-                        className="object-cover rounded-lg"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end p-6">
-                        <p className="text-white text-lg font-medium">
-                          L'ITE, une solution complète pour améliorer la performance énergétique de votre logement
-                        </p>
-                      </div>
-                    </div>
-                  </div>
+                 
+                       <div className="my-10">
+                       <ImageComparison beforeImage="/prestations/four-reno.jpeg" afterImage="/prestations/four.jpeg" />
+                       </div>
                 </section>
                 
                 {/* Les avantages de l'ITE */}
