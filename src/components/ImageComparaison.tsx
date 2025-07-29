@@ -97,7 +97,7 @@ export default function ImageComparison({
 
   return (
     <div 
-      className={`relative w-full h-[500px] max-w-6xl mx-auto overflow-hidden rounded-lg shadow-lg select-none ${className}`}
+      className={`relative w-full h-[500px] max-w-6xl px-4 mx-auto overflow-hidden rounded-lg shadow-lg select-none ${className}`}
       ref={containerRef}
       onMouseUp={handleEnd}
       onMouseLeave={handleEnd}
