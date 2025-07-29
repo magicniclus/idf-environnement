@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import Image from 'next/image';
 
 interface ImageComparaisonProps {
@@ -65,22 +65,35 @@ export default function ImageComparison({
     setIsDragging(false);
   };
 
+  // Gestion des événements de souris globaux
+  const handleGlobalMouseMove = useCallback((e: MouseEvent) => {
+    if (!isDragging) return;
+    updatePosition(e.clientX);
+  }, [isDragging]);
+
+  // Gestion des événements tactiles globaux
+  const handleGlobalTouchMove = useCallback((e: TouchEvent) => {
+    if (!isDragging) return;
+    e.preventDefault();
+    updatePosition(e.touches[0].clientX);
+  }, [isDragging]);
+
   // Nettoyage des événements
   useEffect(() => {
     if (isDragging) {
-      window.addEventListener('mousemove', handleMouseMove as any);
-      window.addEventListener('touchmove', handleTouchMove as any, { passive: false });
+      window.addEventListener('mousemove', handleGlobalMouseMove);
+      window.addEventListener('touchmove', handleGlobalTouchMove, { passive: false });
       window.addEventListener('mouseup', handleEnd);
       window.addEventListener('touchend', handleEnd);
     }
 
     return () => {
-      window.removeEventListener('mousemove', handleMouseMove as any);
-      window.removeEventListener('touchmove', handleTouchMove as any);
+      window.removeEventListener('mousemove', handleGlobalMouseMove);
+      window.removeEventListener('touchmove', handleGlobalTouchMove);
       window.removeEventListener('mouseup', handleEnd);
       window.removeEventListener('touchend', handleEnd);
     };
-  }, [isDragging]);
+  }, [isDragging, handleGlobalMouseMove, handleGlobalTouchMove]);
 
   return (
     <div 
