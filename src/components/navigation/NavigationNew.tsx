@@ -242,10 +242,12 @@ export default function NavigationNew({
               </Link>
               
               <Link
-                href="tel:0644646953"
+                href="tel:0185090367
+"
                 className="bg-yellow-500 text-white px-4 py-2 rounded-md hover:bg-yellow-600 transition-colors"
               >
-                06 44 64 69 53
+                01 85 09 03 67
+
               </Link>
             </nav>
 
@@ -340,11 +342,13 @@ export default function NavigationNew({
               </Link>
               
               <Link
-                href="tel:0644646953"
+                href="tel:0185090367
+"
                 className="bg-yellow-500 text-white px-4 py-3 rounded-md hover:bg-yellow-600 transition-colors text-center font-medium mt-4"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Appeler : 06 44 64 69 53
+                Appeler : 01 85 09 03 67
+
               </Link>
             </nav>
           </div>
