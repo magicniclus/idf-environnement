@@ -465,7 +465,7 @@ const SimulatorForm = ({ currentStep, setCurrentStep }: SimulatorFormProps) => {
                     htmlFor="iti" 
                     className="flex items-center cursor-pointer"
                   >
-                    <span className="text-sm">Isolation des murs intérieurs (ITI)</span>
+                    <span className="text-sm">Isolation des murs extérieurs (ITE)</span>
                     {workType === "iti" && (
                       <div className="ml-auto w-5 h-5 bg-blue-600 rounded-full flex items-center justify-center">
                         <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
