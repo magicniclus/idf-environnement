@@ -43,11 +43,13 @@ export default function Footer() {
                 du lundi au vendredi de 8h30 à 19h
               </p>
               <a
-                href="tel:0644646953"
+                href="tel:0185090367
+"
                 className="flex items-center space-x-2 text-white hover:text-yellow-300 transition-colors group"
               >
                 <PhoneIcon className="w-5 h-5" />
-                <span className="text-2xl font-bold">06 44 64 69 53</span>
+                <span className="text-2xl font-bold">01 85 09 03 67
+</span>
               </a>
               <p className="text-sm text-slate-400">Service Gratuit</p>
             </div>
