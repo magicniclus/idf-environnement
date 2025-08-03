@@ -236,8 +236,10 @@ export default function Contact() {
                     </div>
                     <div>
                       <h3 className="font-semibold text-slate-700">Téléphone</h3>
-                      <a href="tel:0644646953" className="text-lg font-bold text-slate-600 hover:underline">
-                        06 44 64 69 53
+                      <a href="tel:0185090367
+" className="text-lg font-bold text-slate-600 hover:underline">
+                        01 85 09 03 67
+
                       </a>
                       <p className="text-sm text-slate-500">Du lundi au vendredi de 8h30 à 19h</p>
                     </div>
