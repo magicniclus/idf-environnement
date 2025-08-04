@@ -44,7 +44,7 @@ export default function PhoneNumber() {
   if (!isScrolled) return null;
 
   return (
-    <div className="fixed top-[110px] right-0 z-40 w-full max-w-6xl mx-auto left-1/2 transform -translate-x-1/2">
+    <div className="fixed top-[120px] right-0 z-40 w-full max-w-6xl mx-auto left-1/2 transform -translate-x-1/2">
       <div className="flex justify-end w-full">
         <div className="bg-slate-100 text-slate-900 py-2 px-4 rounded-lg shadow-lg">
           <div className="flex flex-col items-end">
