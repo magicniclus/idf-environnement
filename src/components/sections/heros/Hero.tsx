@@ -129,8 +129,8 @@ const Hero = () => {
                 <Image
                   src={isScrolled ? "/logo/logo-black.png" : "/logo/logo.png"}
                   alt="IDF Environnement"
-                  width={isScrolled ? 60 : 80}
-                  height={isScrolled ? 60 : 80}
+                  width={isScrolled ? 120 : 120}
+                  height={isScrolled ? 120 : 120}
                   className="transition-all duration-300"
                 />
               </div>
@@ -161,7 +161,7 @@ const Hero = () => {
                 </button>
                 
                 {prestationsMenuOpen && (
-                  <div className="fixed left-1/2 transform -translate-x-1/2 top-[100px] w-full max-w-6xl bg-white rounded-xl shadow-xl py-6 px-6 z-50">
+                  <div className="fixed left-1/2 transform -translate-x-1/2 top-[125px] w-full max-w-6xl bg-white rounded-xl shadow-xl py-6 px-6 z-50">
                     <div className="flex">
                       <div className="w-1/2 pr-6">
                         <h3 className="text-xl font-bold mb-4 text-slate-800 border-b pb-2">Nos prestations</h3>
@@ -250,7 +250,7 @@ const Hero = () => {
                 </button>
                 
                 {aidesMenuOpen && (
-                  <div className="fixed left-1/2 transform -translate-x-1/2 top-[100px] w-full max-w-6xl bg-white rounded-xl shadow-xl py-6 px-6 z-50">
+                  <div className="fixed left-1/2 transform -translate-x-1/2 top-[125px] w-full max-w-6xl bg-white rounded-xl shadow-xl py-6 px-6 z-50">
                     <div className="flex">
                       <div className="w-1/2 pr-6">
                         <h3 className="text-xl font-bold mb-4 text-slate-800 border-b pb-2">Aides financières</h3>
