@@ -20,6 +20,10 @@ const usefulLinks = [
         name: "Politique de confidentialité",
         href: "/politique-confidentialite",
       },
+      {
+        name: "Conditions générales de vente",
+        href: "/conditions-generales-vente",
+      },
     ],
   },
 ];
