@@ -486,7 +486,7 @@ const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: "easeOut", delay: 1.0 }}
-            className="grid md:grid-cols-2 grid-cols-1 gap-8 w-full max-w-2xl mt-10"
+            className="grid md:grid-cols-3 grid-cols-1 gap-8 w-full max-w-4xl mt-10"
           >
             {/* Isolation Card */}
             <Link href="/isolation-murs-exterieurs" className="group">
@@ -521,6 +521,25 @@ const Hero = () => {
                 <h3 className="text-xl font-semibold mb-2 text-slate-900">Aides</h3>
                 <div className="flex items-center justify-center mt-2 group-hover:translate-x-2 transition-transform duration-300 text-slate-900">
                   <span className="mr-2">En savoir plus</span>
+                  <ArrowRightIcon className="h-5 w-5" />
+                </div>
+              </div>
+            </Link>
+
+            {/* IDF Express Card */}
+            <Link href="https://idf-express.fr" className="group" target="_blank" rel="noopener noreferrer">
+              <div className="bg-slate-50 p-6 rounded-lg shadow-lg border border-gray-200 hover:shadow-xl transition-all duration-300 flex flex-col items-center text-center h-full">
+                <div className="relative w-32 h-32 mb-4">
+                  <Image 
+                    src="/illustrations/logo.png" 
+                    alt="IDF Express" 
+                    fill 
+                    className="object-contain"
+                  />
+                </div>
+                <h3 className="text-xl font-semibold mb-2 text-slate-700">IDF Express</h3>
+                <div className="flex items-center justify-center mt-2 group-hover:translate-x-2 transition-transform duration-300 text-slate-700">
+                  <span className="mr-2">Commander une livraison</span>
                   <ArrowRightIcon className="h-5 w-5" />
                 </div>
               </div>
