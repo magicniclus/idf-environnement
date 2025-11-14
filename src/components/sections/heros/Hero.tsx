@@ -145,6 +145,13 @@ const Hero = () => {
                 Accueil
               </Link>
               
+              <Link
+                href="/blog"
+                className={`text-${isScrolled ? "slate-900" : "white"} hover:text-yellow-500 transition-colors`}
+              >
+                Articles
+              </Link>
+              
               {/* Prestations Dropdown */}
               <div className="relative" ref={prestationsMenuRef}>
                 <button
@@ -349,6 +356,14 @@ const Hero = () => {
                 onClick={() => setIsMenuOpen(false)}
               >
                 Accueil
+              </Link>
+              
+              <Link
+                href="/blog"
+                className="text-white hover:text-yellow-500 transition-colors py-2"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Articles
               </Link>
               
               <div className="space-y-2">

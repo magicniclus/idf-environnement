@@ -120,6 +120,13 @@ const HeroContact = () => {
                 Accueil
               </Link>
               
+              <Link
+                href="/blog"
+                className="text-slate-700 hover:text-slate-900 transition-colors"
+              >
+                Articles
+              </Link>
+              
               {/* Prestations Dropdown */}
               <div className="relative" ref={prestationsMenuRef}>
                 <button
@@ -321,6 +328,14 @@ const HeroContact = () => {
                 onClick={() => setIsMenuOpen(false)}
               >
                 Accueil
+              </Link>
+              
+              <Link
+                href="/blog"
+                className="text-white hover:text-yellow-500 transition-colors py-2"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Articles
               </Link>
               
               <div className="space-y-2">

@@ -1,6 +1,7 @@
 import { PhoneIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import Link from "next/link";
+import { blogPosts } from "@/data/blogPosts";
 
 const usefulLinks = [
   {
@@ -59,8 +60,8 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Right Column - Useful Links */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {/* Right Column - Useful Links and Articles */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {usefulLinks.map((section) => (
               <div key={section.title} className="space-y-4">
                 <h3 className="text-lg font-semibold text-white">
@@ -80,6 +81,34 @@ export default function Footer() {
                 </ul>
               </div>
             ))}
+            
+            {/* Articles Section */}
+            <div className="space-y-4">
+              <h3 className="text-lg font-semibold text-white">
+                Articles
+              </h3>
+              <ul className="space-y-2">
+                <li>
+                  <Link
+                    href="/blog"
+                    className="text-slate-300 hover:text-yellow-300 transition-colors"
+                  >
+                    Tous nos articles
+                  </Link>
+                </li>
+                {blogPosts.slice(0, 3).map((post) => (
+                  <li key={post.slug}>
+                    <Link
+                      href={`/blog/${post.slug}`}
+                      className="text-slate-300 hover:text-yellow-300 transition-colors text-sm line-clamp-2"
+                      title={post.title}
+                    >
+                      {post.title.length > 50 ? `${post.title.substring(0, 50)}...` : post.title}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
 
