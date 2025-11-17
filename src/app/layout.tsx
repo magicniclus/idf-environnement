@@ -33,6 +33,7 @@ export default function RootLayout({
     <html lang="fr">
       <head>
         <GoogleAdsTag />
+        <meta name="facebook-domain-verification" content="iollcbvj27b8jay5jrweftay0i4rws" />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
