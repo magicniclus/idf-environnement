@@ -11,13 +11,22 @@ interface ImageComparaisonProps {
   className?: string;
 }
 
-export default function ImageComparison({
+interface SingleComparisonProps {
+  beforeImage: string;
+  afterImage: string;
+  beforeLabel?: string;
+  afterLabel?: string;
+  className?: string;
+}
+
+// Composant pour une seule comparaison
+function SingleComparison({
   beforeImage,
   afterImage,
   beforeLabel = 'Avant',
   afterLabel = 'Après',
   className = '',
-}: ImageComparaisonProps) {
+}: SingleComparisonProps) {
   const [position, setPosition] = useState(50);
   const containerRef = useRef<HTMLDivElement>(null);
   const [isDragging, setIsDragging] = useState(false);
@@ -102,29 +111,29 @@ export default function ImageComparison({
       onMouseUp={handleEnd}
       onMouseLeave={handleEnd}
     >
-      {/* Image d'après (en arrière-plan) */}
+      {/* Image d'avant (en arrière-plan) */}
       <div className="absolute inset-0 w-full h-full">
         <Image
-          src={afterImage}
-          alt="Après"
+          src={beforeImage}
+          alt="Avant"
           fill
           className="object-cover"
           priority
         />
       </div>
       
-      {/* Image d'avant qui prend toute la largeur mais est masquée par le conteneur */}
+      {/* Image d'après qui prend toute la largeur mais est masquée par le conteneur */}
       <div 
         className="absolute inset-0 h-full overflow-hidden"
         style={{
           width: '100%',
-          clipPath: `inset(0 0 0 ${position}%)`,
+          clipPath: `inset(0 ${100 - position}% 0 0)`,
         }}
       >
         <div className="w-full h-full">
           <Image
-            src={beforeImage}
-            alt="Avant"
+            src={afterImage}
+            alt="Après"
             fill
             className="object-cover"
             sizes="100vw"
@@ -160,6 +169,61 @@ export default function ImageComparison({
       </div>
       <div className="absolute top-4 right-4 bg-black bg-opacity-50 text-white px-3 py-1 rounded-md text-sm font-medium">
         {afterLabel}
+      </div>
+    </div>
+  );
+}
+
+// Composant principal avec deux comparaisons
+export default function ImageComparison({
+  beforeImage,
+  afterImage,
+  beforeLabel = 'Avant',
+  afterLabel = 'Après',
+  className = '',
+}: ImageComparaisonProps) {
+  const [activeComparison, setActiveComparison] = useState(0);
+
+  // Deux comparaisons avec des images différentes
+  const comparisons = [
+    {
+      beforeImage,
+      afterImage,
+      beforeLabel,
+      afterLabel,
+    },
+    {
+      beforeImage: '/prestations/comparaison-2-after.jpeg',
+      afterImage: '/prestations/comparaison-2-before.jpeg',
+      beforeLabel,
+      afterLabel,
+    }
+  ];
+
+  return (
+    <div className={`w-full ${className}`}>
+      {/* Comparaison active */}
+      <SingleComparison
+        beforeImage={comparisons[activeComparison].beforeImage}
+        afterImage={comparisons[activeComparison].afterImage}
+        beforeLabel={comparisons[activeComparison].beforeLabel}
+        afterLabel={comparisons[activeComparison].afterLabel}
+      />
+      
+      {/* Bulles de navigation */}
+      <div className="flex justify-center mt-6 space-x-3">
+        {comparisons.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => setActiveComparison(index)}
+            className={`w-3 h-3 rounded-full transition-all duration-300 ${
+              activeComparison === index
+                ? 'bg-yellow-500 scale-110'
+                : 'bg-gray-300 hover:bg-gray-400'
+            }`}
+            aria-label={`Comparaison ${index + 1}`}
+          />
+        ))}
       </div>
     </div>
   );

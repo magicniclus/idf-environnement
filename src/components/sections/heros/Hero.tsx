@@ -479,7 +479,7 @@ const Hero = () => {
             transition={{ duration: 0.6, ease: "easeOut", delay: 0.4 }}
             className="md:text-xl text-sm md:text-2xl mb-6 max-w-2xl"
           >
-            ITE (Isolation des murs exterieurs) | Isolation des combles | Service de livraison
+            ITE (Isolation des murs exterieurs) | Isolation des combles
           </motion.p>
           
           <motion.div
