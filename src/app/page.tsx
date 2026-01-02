@@ -12,7 +12,7 @@ import Partenaires from "@/components/sections/partenaires/Partenaires";
 import Prestation from "@/components/sections/prestation/Prestation";
 
 export default function Home() {
-  const [showOldVersion, setShowOldVersion] = useState(true);
+  const [showOldVersion, setShowOldVersion] = useState(false);
 
   if (showOldVersion) {
     return (
