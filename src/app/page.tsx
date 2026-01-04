@@ -51,12 +51,6 @@ export default function Home() {
 
   return (
     <div className="relative">
-      <button
-        onClick={() => setShowOldVersion(true)}
-        className="fixed top-4 right-4 z-50 px-4 py-2 bg-slate-800 hover:bg-slate-700 text-white text-sm font-medium rounded-lg shadow-lg transition-all duration-300 border border-slate-600"
-      >
-        Version alternative
-      </button>
       
       <Hero />
       <Certifications />
